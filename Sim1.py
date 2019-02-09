@@ -1,10 +1,10 @@
 
 
-     #####   #####   ######   #######   #####    #   #    ######
-     #   #   #       #           #      #   #    #   #    #    #
-     #####   ####    ######      #      #####    #   #    ######
-     # #     #            #      #      #   #    #   #    # #
-     #  #    #####   ######      #      #   #    #####    #  #
+     #####   #####   ######   #######   #####    #   #    ######    #####   #   #  #######
+     #   #   #       #           #      #   #    #   #    #    #    #   #   ##  #     #
+     #####   ####    ######      #      #####    #   #    ######    #####   # # #     #
+     # #     #            #      #      #   #    #   #    # #       #   #   #  ##     #
+     #  #    #####   ######      #      #   #    #####    #  #      #   #   #   #     #
 
 # Nous tenterons ici de modéliser un restaurant en action comprenant :
 # des serveurs, des tables, des clients.
@@ -17,6 +17,7 @@
 # de restaurant (nombre de tables), quel nombre de serveur serait minimal pour assurer un
 # service de qualité.
 
+"""
 Carte = dict[str : float]
 #Plats : Carte
 Plats = { "Assiette végétarienne" : 10.30,
@@ -25,13 +26,23 @@ Plats = { "Assiette végétarienne" : 10.30,
 #Entrees : Carte
 Entrees = { "Salade fermière" : 10.00,
             "Assiette de fromage" : 5.20,
-            "Thonmate -Spécialité du chef-"" : 12.00}
+            "Thonmate -Spécialité du chef-"" : 12.00}"""
+
+
+
+def update_time():
+    """ Assure le suivi temporel de notre programme."""
+    current = default_timer() - debut
+    minutes, seconds = divmod(current, 60)
+    show_time = "%d : %d" % (minutes, seconds)
+
 
 def Clients():
     "génère un nombre aléatoire de clients entre 1 et 4"
     #nb_clients : int
     nb_clients = randint(1,4)
     return nb_clients
+
 
 def Table_2(n):
     """
@@ -40,12 +51,14 @@ def Table_2(n):
     table_2 = {i : (0, False) for i in range(1, n+1)}
     return table_2
 
+
 def Table_4(n):
     """
     int-> dict[int : tuple[int, bool]]
     Tables pour 4 clients."""
     table_4 = {i : (0, False) for i in range(1, n+1)}
     return table_4
+
 
 def Remplissage():
     """Rempli les 2n tables avec les clients arrivés."""
@@ -76,8 +89,11 @@ def Remplissage():
                         full = True
                 return Table_4
 
+
 def mise_a_jour():
-    """ Mets à jour la liste des tables pleines."""
+    """ Mets à jour la liste des tables pleines
+    La fonction met à jour un dictionnaire qui prend en clé un numéro de table
+    et en valeur une chaîne de caractère qui détermine son statut."""
 
     for (i,(nb, full)) in Table_4.items():
         if full and T4full[i]!="en attente" #Si la table n'a pas encore commandé
@@ -86,8 +102,11 @@ def mise_a_jour():
         if full and T2full[i] != "en attente":
             T2full[i] = "prêt à commander"
 
+
 def Commande(menu):
-    """ Une table remplie peut passer commande"""
+    """ Une table remplie peut passer commande
+    Commande est un dictionnaire qui prend en clé le numéro de la table, et en valeur
+    un liste aléatoire de commandes."""
 
     #Les deux dictionnaires Commande2 et Commande4 répertorient une liste de commandes par numéro de table, respectivement
     #pour 2 et 4 personnes.
@@ -105,3 +124,13 @@ def Commande(menu):
                 Commande2[i].append(choice(Plats))
             T2full[i] == "en attente"
     return (Commande4, Commande2)
+
+
+##################################################################################
+#                                                                                #
+#             LANCEMENT DES FONCTIONS ET INITIALISATION DES VARIABLES            #                                                                                                    #
+#                                                                                #
+##################################################################################
+
+# Timer #
+debut = default_timer()
