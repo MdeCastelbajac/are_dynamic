@@ -24,16 +24,54 @@ for i in range(n):
         cel[4+6*i,1+4*j]=cel[4+6*i,2+4*j]=8 #disposition des tables de 2
         tables[2*i+2]=[[4+6*i,1+4*j],[4+6*i,2+4*j]] #ajout des tables de 2 dans tables
 
-rempli={} #dictionnaire pour savoir si une table est occupée
+rempli={} #dictionnaire pour savoir combien de personnes sont à chaque table
 for num in tables.keys():
-    rempli[num]=False
+    rempli[num]=0
 
 ent=(0,0) #position de l'entrée
 
 sort=(L-1,l-1) #position des cuisines
 
-freq=60 #temps entre chaque arrivée (variable)
+freq=50 #temps entre chaque arrivée (variable)
 
-reflex=20 #temps requis avant de pouvoir commander (variable)
+reflex=10 #temps requis avant de pouvoir commander (variable)
+
+t=0 #temps depuis le début
+
+#Reprise du travail déjà existant
+###############################################################################################################################
+#Carte = dict[str : float]
+
+#Plats : Carte
+
+Plats = { "Assiette végétarienne" : 10.30,
+
+          "Poulet fermier et pommes grenades" : 25.00,
+
+          "N'importe quoi" : 18.30}
+
+#Entrees : Carte
+
+Entrees = { "Salade fermière" : 10.00,
+
+            "Assiette de fromage" : 5.20,
+
+            "Thonmate -Spécialité du chef-" : 12.00}
+###############################################################################################################################
+
+def Commande(num): #juste une adaptation de la fonction proposée pour passer les commandes
+    comm=[]
+    for i in range(rempli[num]):
+        comm.append([rd.choice(Entrees),rd.choice(Plats)])
+    return comm
+
+def Cuisson(comm): #renvoie le temps de cuisson d'une commande
+    cuis=[0,0]
+    for i in comm:
+        if i[0]>cuis[0]:
+            cuis[0]=i[0]
+        if i[1]>cuis[1]:
+            cuis[1]=i[1]
+    return cuis
 
 print(cel)
