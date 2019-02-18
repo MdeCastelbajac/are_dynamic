@@ -28,13 +28,17 @@ rempli={} #dictionnaire pour savoir combien de personnes sont à chaque table
 for num in tables.keys():
     rempli[num]=0
 
-ent=(0,0) #position de l'entrée
+ent=[0,0] #position de l'entrée
 
-sort=(L-1,l-1) #position des cuisines
+sort=[L-1,l-1] #position des cuisines
 
-freq=50 #temps entre chaque arrivée (variable)
+freq=60 #temps entre chaque arrivée (variable)
+
+visit=0 #nombre de visites de clients
 
 reflex=10 #temps requis avant de pouvoir commander (variable)
+
+nett=10 #temps requis pour débarrasser une table
 
 t=0 #temps depuis le début
 
@@ -58,6 +62,13 @@ Entrees = { "Salade fermière" : 10.00,
 
             "Thonmate -Spécialité du chef-" : 12.00}
 ###############################################################################################################################
+
+def Arrivee():
+    if t>=freq*(visit+1):
+        if cel[ent]==0:
+            cel[ent]=rd.randint(1,4)
+            visit+=1
+    return
 
 def Commande(num): #juste une adaptation de la fonction proposée pour passer les commandes
     comm=[]
