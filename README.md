@@ -4,7 +4,7 @@
 
 Mardi 19 février
 
-Présentation du projet
+<b>Présentation du projet<b>
 
 Nous avons décidé de modéliser, dans le cadre de l'Atelier de Recherche Encadrée, le fonctionnement d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
 
@@ -14,7 +14,7 @@ Sachant qu'un temps d'attente réduit profite au restaurant comme aux clients, o
 
 On modélisera le restaurant par deux pièces. L'une est la salle de restauration comprenant des tables dont on limitera la taille à deux et quatre personnes qu'occupent les clients qui arrivent en nombre aléatoire et qui passent commande aléatoirement. L'autre représente la cuisine, et affichera les timers de cuisson et/ou de préparation des commandes passées. Enfin, les serveurs joueront le lien entre les deux en coordonnant pour optimiser le temps d'attente moyen.
 
-Objectifs
+<b>Objectifs<b>
 
 On regardera systématiquement le temps d'attente moyen en faisant varier différents paramètres :.
 
