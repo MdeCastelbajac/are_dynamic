@@ -1,16 +1,21 @@
-#Voilà un début, pour commencer. Ce n'est pas encore complet et j'attend des commentaires sur les choses à changer.
-
 import numpy as np
 import matplotlib as mp
 import random as rd
 
+#La valeur des groupes de clients arrivants est 1, 2, 3 ou 4.
+#La valeur des groupes partants est 5.
+#La valeur des serveurs aux mains libres est 6.
+#La valeur des serveurs portants des commandes est 7.
+#La valeur des tables inoccupées est 8.
+#La valeur des tables occupées est 9.
+
 n=3 #coefficient de taille (variable)
 
-L=6*n #longueur du restaurant
+L=6*n+2 #longueur du restaurant
 
 l=4*n #largeur du restaurant
 
-cel=np.zeros([L,l]) #cellule représentant le restaurant (d'abord vide)
+cel=np.zeros([L,l]) #cellule représentant le restaurant (d'abbord vide)
 
 nb_tab4=n^2 #nombre de table de 4
 
@@ -19,10 +24,10 @@ nb_tab2=n^2 #nombre de tables de 2
 tables={} #dictionnaire des tables de 2 et de 4
 for i in range(n):
     for j in range(n):
-        cel[1+6*i,1+4*j]=cel[1+6*i,2+4*j]=cel[2+6*i,1+4*j]=cel[2+6*i,2+4*j]=8 #disposition des tables de 4
-        tables[2*i+1]=[[1+6*i,1+4*j],[1+6*i,2+4*j],[2+6*i,1+4*j],[2+6*i,2+4*j]] #ajout des tables de 4 dans tables
-        cel[4+6*i,1+4*j]=cel[4+6*i,2+4*j]=8 #disposition des tables de 2
-        tables[2*i+2]=[[4+6*i,1+4*j],[4+6*i,2+4*j]] #ajout des tables de 2 dans tables
+        cel[2+6*i,1+4*j]=cel[2+6*i,2+4*j]=cel[3+6*i,1+4*j]=cel[3+6*i,2+4*j]=8 #disposition des tables de 4
+        tables[2*i+1]=[[2+6*i,1+4*j],[2+6*i,2+4*j],[3+6*i,1+4*j],[3+6*i,2+4*j]] #ajout des tables de 4 dans tables
+        cel[5+6*i,1+4*j]=cel[5+6*i,2+4*j]=8 #disposition des tables de 2
+        tables[2*i+2]=[[5+6*i,1+4*j],[5+6*i,2+4*j]] #ajout des tables de 2 dans tables
 
 rempli={} #dictionnaire pour savoir combien de personnes sont à chaque table
 for num in tables.keys():
@@ -30,7 +35,9 @@ for num in tables.keys():
 
 ent=[0,0] #position de l'entrée
 
-sort=[L-1,l-1] #position des cuisines
+sort=[0,l-1] #position de la sortie
+
+cuisin=[L-1] #position des cuisines
 
 freq=60 #temps entre chaque arrivée (variable)
 
@@ -38,9 +45,17 @@ visit=0 #nombre de visites de clients
 
 reflex=10 #temps requis avant de pouvoir commander (variable)
 
-nett=10 #temps requis pour débarrasser une table
+nett=10 #temps requis pour débarrasser une table (variable)
 
 t=0 #temps depuis le début
+
+serv=2 #nombre de serveurs dans l'hypothèse que ce nombre ne dépasse pas 2n (variable)
+
+serveurs={} #dictionnaire associant chaque serveur à sa position
+for i in range(serv):
+    serveurs[i+1]=[L-1,2*i]
+
+clients={} #dictionnaire associant chaque groupe de clients à sa position
 
 #Reprise du travail déjà existant
 ###############################################################################################################################
@@ -63,26 +78,50 @@ Entrees = { "Salade fermière" : 10.00,
             "Thonmate -Spécialité du chef-" : 12.00}
 ###############################################################################################################################
 
-def Arrivee():
-    if t>=freq*(visit+1):
-        if cel[ent]==0:
-            cel[ent]=rd.randint(1,4)
+def Fvp(List,val): #fixe la valeur d'une position
+    cel[List[0],List[1]]=val
+
+def Rvp(List): #renvoie la valeur d'une position
+    return cel[List[0],List[1]]
+
+def Keyval(D,val): #renvoie une clé à partir de sa valeur dans un dictionnaire (valeurs supposées uniques)
+    for i in D:
+        if D[i]==val:
+            return i
+
+cibl_serv={} #dictionnaire associant chaque serveur à une position cible
+for i in serveurs:
+    cibl_serv[i]=serveurs[i]
+    Fvp(cibl_serv[i],6) #fixe la valeur 6 sur la position des serveurs
+
+def Arrivee(): #simule l'arrivée d'un nouveau groupe de clients
+    global visit
+    if t>=visit*freq:
+        if Rvp(ent)==0:
+            Fvp(ent,rd.randint(1,4))
             visit+=1
-    return
+            clients[visit]=ent
+
+def Sortie(): #simule la sortie d'un groupe de clients
+    if Rvp(sort)==5 and sort in clients.values:
+        Fvp(sort,0)
+        del clients[Keyval(clients,sort)]
 
 def Commande(num): #juste une adaptation de la fonction proposée pour passer les commandes
     comm=[]
-    for i in range(rempli[num]):
-        comm.append([rd.choice(Entrees),rd.choice(Plats)])
+    entree=[k for k in Entrees]
+    plats=[k for k in Plats]
+    for i in range(0,rempli[num]):
+        comm.append([rd.choice(entree),rd.choice(plats)])
     return comm
 
 def Cuisson(comm): #renvoie le temps de cuisson d'une commande
     cuis=[0,0]
     for i in comm:
-        if i[0]>cuis[0]:
-            cuis[0]=i[0]
-        if i[1]>cuis[1]:
-            cuis[1]=i[1]
+        if Entrees[i[0]]>cuis[0]:
+            cuis[0]=Entrees[i[0]]
+        if Plats[i[1]]>cuis[1]:
+            cuis[1]=Plats[i[1]]
     return cuis
 
 print(cel)
