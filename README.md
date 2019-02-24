@@ -19,6 +19,9 @@ Le modèle est bâti autours de cinq points clés :
 - Une cuisine, pivot du modèle, chargée de trier, en fonction de divers paramètres, les plats à cuisiner / préparer en respectant une contrainte fondamentale : les plats commandés à une même tables doivent être servis dans un intervalle de temps restreint, les clients d'une même tables s'attendent à manger ensemble.
 - Un Temps d'Attente Moyen ou TAM, qui est la valeur à surveiller. Elle se construit en calculant le temps d'attente, pour un client, entre deux étapes (ie arrivéé -> commande, commande -> dégustation, etc.).
 
+![alt text](https://.github.com/TortueDivine/are_dynamic/Présentation/Restaurant.jpg)
+
+
 <b>Objectifs</b>
 
 On s'aperçoit immédiatement que les comportements respectifs des serveurs et de la cuisine auront une grande influence sur le TAM.
