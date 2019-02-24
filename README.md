@@ -17,7 +17,7 @@ Le modèle est bâti autours de cinq points clés :
 - Les tables que ces derniers remplissent pour passer commande aléatoirement.
 - Les serveurs, chargés entre autre de récupérer ces commandes et de les envoyer en cuisine. Ils effectuent également tout un tas d'autre tâches plus ou moins intermédiaires : apporter les plats, débarasser, accueillir les clients, etc.
 - Une cuisine, pivot du modèle, chargée de trier, en fonction de divers paramètres, les plats à cuisiner / préparer en respectant une contrainte fondamentale : les plats commandés à une même tables doivent être servis dans un intervalle de temps restreint, les clients d'une même tables s'attendent à manger ensemble.
-- Un Temps d'Attente Moyen ou TAM, qui est la valeur à surveiller. Elle se construit en calculant le temps d'attente, pour un client, entre deux étapes (ie arrivéé -> commande, commande -> dégustation, etc.).
+- Un Temps d'Attente Moyen ou TAM, qui est la valeur à surveiller. Elle se construit en calculant le temps d'attente, pour un client, entre deux étapes (ie arrivée -> commande, commande -> dégustation, etc.).
 <p align="center">
    <img src="https://github.com/TortueDivine/are_dynamic/blob/master/Pr%C3%A9sentation/Restaurant_test_1.jpg?raw=true" alt="Illustration de l'environnement de simulation"/>
 
@@ -27,7 +27,7 @@ Le modèle est bâti autours de cinq points clés :
 
 On s'aperçoit immédiatement que les comportements respectifs des serveurs et de la cuisine auront une grande influence sur le TAM.
 
-Nous nous demanderons donc s'il existe des comportements plus efficaces (compte tenu de la place de l'aléatoire) qui permettent d'obtenir un TMA minimal.
+Nous nous demanderons donc s'il existe des comportements plus efficaces (compte tenu de la place de l'aléatoire) qui permettent d'obtenir un TAM minimal.
 
 On pourra songer aussi à modifier d'autres paramètres plus spécifiques du modèle pour en tirer d'autres observations comme la rapidité d'exécution des différentes entités, ou encore la variété (et donc la variabilité) des temps de cuisson / préparation des plats.
 
