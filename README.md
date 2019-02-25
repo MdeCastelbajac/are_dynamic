@@ -8,7 +8,7 @@ Mardi 19 février
 
 Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Recherche Encadrée, l'activité d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
 
-Nous rappellerons qu'un système complexe est "un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible" (définition du CNRS). 
+Nous rappellerons qu'un système complexe est "un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible" (définition du CNRS). Nous détaillerons ci-après les entités, intéractions et comportements de notre modèle.
 
 
 ### Description du modèle
