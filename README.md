@@ -4,14 +4,14 @@
 
 Mardi 19 février
 
-<b>Présentation du projet</b>
+### Présentation du projet
 
 Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Recherche Encadrée, l'activité d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
 
 Nous rappellerons qu'un système complexe "est un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible" (définition du CNRS). 
 
 
-<b>Description du modèle</b>
+### Description du modèle
 
 Le modèle est bâti autours de cinq points clés : 
 - Les clients qui arrivent aléatoirement.
@@ -24,7 +24,7 @@ Le modèle est bâti autours de cinq points clés :
 
 </p>
 
-<b>Objectifs</b>
+### Objectifs
 
 On s'aperçoit immédiatement que les comportements respectifs des serveurs et de la cuisine auront une grande influence sur le TAM.
 
