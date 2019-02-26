@@ -57,7 +57,7 @@ Mardi 5/03
 ### Première simulation
 Nous allons maintenant construire une simulation graphique de ce premier modèle, en utilisant le programme précédemment élaboré.
 L'objectif est double : 
-D'une part, décider d'une charte graphique qui sera maintenue pour le reste du développement.
-D'autre part, s'essayer aux outils de simulation graphique sous Python et confirmer une approche de la même manière que la semaine précédente.
+- D'une part, décider d'une charte graphique qui sera maintenue pour le reste du développement.
+- D'autre part, s'essayer aux outils de simulation graphique sous Python et confirmer une approche de la même manière que la semaine précédente.
 
 #### Résultat
