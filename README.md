@@ -2,7 +2,7 @@
 
 ## RESTAURATION : Optimisation et coordination des tâches
 
-Mardi 19 février
+## Mardi 19 février
 
 ### Présentation du projet
 
@@ -34,12 +34,7 @@ On pourra songer aussi à modifier d'autres paramètres plus spécifiques du mod
 
 
 
-
-
-
-
-
-Mardi 26/02
+## Mardi 26/02
 
 ### Premier modèle
 Dans un premier temps, nous nous essayerons à un modèle simple. Celui-ci se compose de : 
@@ -52,7 +47,7 @@ L'objectif est de coder en une semaine un programme viable, conforme à ce modè
 
 #### Résultat
 
-Mardi 5/03
+## Mardi 5/03
 
 ### Première simulation
 Nous allons maintenant construire une simulation graphique de ce premier modèle, en utilisant le programme précédemment élaboré.
