@@ -1,0 +1,123 @@
+import numpy as np
+import matplotlib as mp
+import random as rd
+
+#Carte = dict[str : float]
+
+#Plats : Carte
+
+Plats = { "Assiette végétarienne" : 10.30,
+          "Poulet fermier et pommes grenades" : 25.00,
+          "N'importe quoi" : 18.30}
+
+#Entrees : Carte
+
+Entrees = { "Salade fermière" : 10.00,
+            "Assiette de fromage" : 5.20,
+            "Thonmate -Spécialité du chef-" : 12.00}
+
+t=0 #temps
+v=0 #visites
+cellule=np.zeros([8,6]) #cellule graphique
+
+def Fvp(List,val): #fixe la valeur d'une position
+    cellule[List[0],List[1]]=val
+
+def Rvp(List): #renvoie la valeur d'une position
+    return cellule[List[0],List[1]]
+
+def Proba(p):
+    n=rd.random()
+    s=0
+    for k in p:
+        s+=p[k]
+        if u<s:
+            return k
+
+table=[[3,2],[3,3],[4,2],[4,3]] #emplacement table
+chaises=[[2,2],[2,3],[5,2],[5,3]] #emplacement chaises
+chaises1=[[2,1],[2,4],[5,1],[5,4]]
+entree=[[0,0],[0,1],[1,0],[1,1]] #epmlacement entrée
+serveur=[7,5] #emplacement serveur
+cibl_serv=serveur #position cible serveur
+Fvp(cibl_serv,5) #génération serveur
+cibl_cl={} #association des clients avec leur position cible
+statabl=0 #état de la table
+activ=0 #activité du serveur
+placnot=[4,4]
+cuisines=[7,5]
+accueil=[0,2]
+
+for i in table:
+    Fvp(i,8) #génération de tables
+
+for i in chaises:
+    Fvp(i,6) #génération de chaises
+
+def arriv(): #arrivée de clients
+    global v
+    if t>=100*v:
+        if t>=100*(v+1):
+            v+=1
+        elif not(1 in [Rvp(k) for k in entree]):
+            group=rd.randint(1,4)
+            for i in range(group):
+                p=entree[i]
+                Fvp(p,1)
+                cibl_cl[len(cibl_cl)+1]=chaises1[i]
+                v+=1
+
+def depart(): #disparition de clients
+    if cellule[0,6]==2:
+        cellule[0,6]=0
+
+def deplac(coord,direct): #gestion d'un déplacement d'une case
+    c=coord
+    v=Rvp(coord)
+    if direct==1: #haut
+        c=[c[0]-1,c[1]]
+    elif direct==2: #droite
+        c=[c[0],c[1]+1]
+    elif direct==3: #bas
+        c=[c[0]+1,c[1]]
+    elif direct==4: #gauche
+        c=[c[0],c[1]-1]
+    if Rvp(c)==0:
+            Fvp(coord,0)
+            Fvp(c,v)
+
+def tach(): #assignation du serveur aux taches à accomplir
+    if statabl==1: #la table est sale et déserte
+        activ=1 #assignation au débarrassage de la table
+        cibl_serv=placnot
+    elif (statabl==0) and (serveur==placnot): #le serveur vient de finir de débarrasser la table
+        activ=0 #le serveur remporte les couverts
+        cibl_serv=cuisines
+    elif (activ==0) and (statabl==0) and (serveur==cuisines) and (1 in [Rvp(k) for k in entree]):
+        #des clients sont arrivés et le serveur est inactif
+        activ=3 #le serveur s'occupe de l'accueil
+        cibl_serv=accueil
+    elif (activ==3) and (serveur==accueil): #le serveur vient d'accueillir les clients
+        activ=4 #le serveur amène les clients à la table
+        cibl_serv=placnot
+    elif (activ==4) and (serveur==placnot) and (len(np.argwhere(cellule==1 and not(cellule in entree)))==0):
+        #le serveur vient de guider les clients à leur table
+        activ=5 #le serveur prend les commandes
+    elif activ==5: #les clients viennent de commander
+        activ=6 #le serveur va renseigner les cuisines
+        cibl_serv=cuisines
+    elif (activ==6) and (prepar==1): #les entrées sont prètes
+        activ=7 #le serveur apporte les entrées
+        cibl_serv=placnot
+    elif (activ==7) and (serveur==placnot): #les entrées sont servies
+        activ=8 #le serveur va attendre les plats
+        cibl_serv=cuisines
+    elif (activ==8) and (serveur==cuisines) and (prepar==2): #les plats sont prèts
+        activ=9 #le serveur apporte les plats
+        cibl_serv=placnot
+    elif (activ==9) and (serveur==placnot): #les plats sont servis
+        activ=0 #le serveur attend sans rien faire
+        cibl_serv=cuisines
+
+arriv()
+print(cellule)
