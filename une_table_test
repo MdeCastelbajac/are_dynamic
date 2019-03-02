@@ -18,6 +18,8 @@ Entrees = { "Salade fermière" : 10.00,
 
 t=0 #temps
 v=0 #visites
+pers=0 #nombre de clients reçus
+dep=1 #facteur de déplacement
 cellule=np.zeros([8,6]) #cellule graphique
 
 def Fvp(List,val): #fixe la valeur d'une position
@@ -34,19 +36,26 @@ def Proba(p):
         if u<s:
             return k
 
+def Keyval(D,val): #renvoie une clé à partir de sa valeur dans un dictionnaire (valeurs supposées uniques)
+    for i in D:
+        if D[i]==val:
+            return i
+
 table=[[3,2],[3,3],[4,2],[4,3]] #emplacement table
 chaises=[[2,2],[2,3],[5,2],[5,3]] #emplacement chaises
-chaises1=[[2,1],[2,4],[5,1],[5,4]]
+chaises1=[[2,1],[2,4],[5,1],[5,4]] #emplacement pour s'assoir
 entree=[[0,0],[0,1],[1,0],[1,1]] #epmlacement entrée
 serveur=[7,5] #emplacement serveur
 cibl_serv=serveur #position cible serveur
 Fvp(cibl_serv,5) #génération serveur
+cl={} #dictionnaire associant les clients à leur emplacement
 cibl_cl={} #association des clients avec leur position cible
 statabl=0 #état de la table
+prepar=0 #état de la préparation
 activ=0 #activité du serveur
-placnot=[4,4]
-cuisines=[7,5]
-accueil=[0,2]
+placnot=[4,4] #place pour prendre des commandes
+cuisines=[7,5] #place pour l'interaction avec les cuisines
+accueil=[0,2] #place pour accueillir les clients
 
 for i in table:
     Fvp(i,8) #génération de tables
@@ -55,20 +64,23 @@ for i in chaises:
     Fvp(i,6) #génération de chaises
 
 def arriv(): #arrivée de clients
-    global v
+    global v,pers
     if t>=100*v:
         if t>=100*(v+1):
             v+=1
         elif not(1 in [Rvp(k) for k in entree]):
             group=rd.randint(1,4)
             for i in range(group):
-                p=entree[i]
-                Fvp(p,1)
-                cibl_cl[len(cibl_cl)+1]=chaises1[i]
+                pers+=1
+                cl[pers]=entree[i]
+                Fvp(cl[pers],1)
+                cibl_cl[pers]=cl[pers]
                 v+=1
 
 def depart(): #disparition de clients
     if cellule[0,6]==2:
+        del cibl_cl[Keyval(cl,[0,6])]
+        del cl[Keyval(cl,[0,6])]
         cellule[0,6]=0
 
 def deplac(coord,direct): #gestion d'un déplacement d'une case
@@ -83,8 +95,28 @@ def deplac(coord,direct): #gestion d'un déplacement d'une case
     elif direct==4: #gauche
         c=[c[0],c[1]-1]
     if Rvp(c)==0:
-            Fvp(coord,0)
-            Fvp(c,v)
+        Fvp(coord,0) #libération d'un emplacement
+        Fvp(c,v) #occupation d'une nouvelle case
+    return c
+
+def ciblag(): #gestion des déplacements ciblés
+    global serveur
+    for i in range(dep): #déplacement du serveur
+        if cibl_serv[0]<serveur[0]:
+            serveur=deplac(serveur,1)
+        elif cibl_serv[1]<serveur[1]:
+            serveur=deplac(serveur,4)
+        elif cibl_serv[1]>serveur[1]:
+            serveur=deplac(serveur,2)
+        elif cibl_serv[0]>serveur[0]:
+            serveur=deplac(serveur,3)
+        for j in cl: #déplacement des clients
+            if cibl_cl[j][1]>cl[j][1]:
+                cl[j]=deplac(cl[j],2)
+            elif cibl_cl[j][0]>cl[j][0]:
+                cl[j]=deplac(cl[j],3)
+            elif cibl_cl[j][0]<cl[j][0]:
+                cl[j]=deplac(cl[j],1)
 
 def tach(): #assignation du serveur aux taches à accomplir
     if statabl==1: #la table est sale et déserte
