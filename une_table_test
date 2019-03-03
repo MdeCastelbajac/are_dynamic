@@ -20,6 +20,7 @@ t=0 #temps
 v=0 #visites
 pers=0 #nombre de clients reçus
 dep=1 #facteur de déplacement
+degust=0 #temps depuis que les plats sont servis
 cellule=np.zeros([8,6]) #cellule graphique
 
 def Fvp(List,val): #fixe la valeur d'une position
@@ -50,12 +51,15 @@ cibl_serv=serveur #position cible serveur
 Fvp(cibl_serv,5) #génération serveur
 cl={} #dictionnaire associant les clients à leur emplacement
 cibl_cl={} #association des clients avec leur position cible
+comm={} #dictionnaire associant les commandes à leur temps de cuisson
 statabl=0 #état de la table
 prepar=0 #état de la préparation
 activ=0 #activité du serveur
 placnot=[4,4] #place pour prendre des commandes
 cuisines=[7,5] #place pour l'interaction avec les cuisines
 accueil=[0,2] #place pour accueillir les clients
+E=[] #liste des entrées commandées (optionnel)
+P=[] #liste des plats commandés (optionnel)
 
 for i in table:
     Fvp(i,8) #génération de tables
@@ -111,14 +115,50 @@ def ciblag(): #gestion des déplacements ciblés
         elif cibl_serv[0]>serveur[0]:
             serveur=deplac(serveur,3)
         for j in cl: #déplacement des clients
-            if cibl_cl[j][1]>cl[j][1]:
+            if cibl_cl[j][0]<cl[j][0]:
+                if Rvp([cl[j][0]-1,cl[j][1]])==0:
+                    cl[j]=deplac(cl[j],1)
+                else:
+                    cl[j]=deplac(cl[j],2)
+            elif cibl_cl[j][1]>cl[j][1]:
                 cl[j]=deplac(cl[j],2)
             elif cibl_cl[j][0]>cl[j][0]:
                 cl[j]=deplac(cl[j],3)
-            elif cibl_cl[j][0]<cl[j][0]:
-                cl[j]=deplac(cl[j],1)
+
+def service():
+    global degust
+    if statabl==2:
+        degust+=1
+    elif statabl==1:
+        degust=0
+    for i in cl:
+        if (cibl_cl[i]==cl[j]) and (cibl_cl[i] in chaises1):
+            Fvp(cl[i],0)
+            cl[i]=cibl_cl[i]=chaises[Keyval(chaises1,cl[i])]
+            Fvp(chaises[Keyval(chaises,cl[i])],7)
+        if cl[i] in chaises:
+            if activ==5:
+                en=rd.choice(Entrees)
+                pl=rd.choice(Plats)
+                E.append(en)
+                P.append(pl)
+                comm[0].append(Entrees[en])
+                comm[1].append(Plats[pl])
+            elif (activ==7) and (serveur==placnot):
+                Fvp(tables[Keyval(chaises,cl[i])],8.5)
+            elif (activ==9) and (serveur==placnot):
+                Fvp(tables[Keyval(chaises,cl[i])],9)
+                statabl=2
+            elif degust==20:
+                Fvp(cl[i],6)
+                Fvp(tables[Keyval(chaises,cl[i])],9.5)
+                cl[i]=chaises1[Keyval(chaises,cl[i])]
+                cibl_cl[i]=[0,6]
+                Fvp(cl[i],2)
+                statabl=1
 
 def tach(): #assignation du serveur aux taches à accomplir
+    global statabl, activ
     if statabl==1: #la table est sale et déserte
         activ=1 #assignation au débarrassage de la table
         cibl_serv=placnot
@@ -132,6 +172,11 @@ def tach(): #assignation du serveur aux taches à accomplir
     elif (activ==3) and (serveur==accueil): #le serveur vient d'accueillir les clients
         activ=4 #le serveur amène les clients à la table
         cibl_serv=placnot
+        d=0
+        for i in cl:
+            if cl[i] in entree:
+                cibl_cl[i]=chaises1[d]
+                d+=1
     elif (activ==4) and (serveur==placnot) and (len(np.argwhere(cellule==1 and not(cellule in entree)))==0):
         #le serveur vient de guider les clients à leur table
         activ=5 #le serveur prend les commandes
@@ -149,6 +194,7 @@ def tach(): #assignation du serveur aux taches à accomplir
         cibl_serv=placnot
     elif (activ==9) and (serveur==placnot): #les plats sont servis
         activ=0 #le serveur attend sans rien faire
+        statabl=2
         cibl_serv=cuisines
 
 arriv()
