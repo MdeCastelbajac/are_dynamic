@@ -31,28 +31,3 @@ On s'aperçoit immédiatement que les comportements respectifs des serveurs et d
 Nous nous demanderons donc s'il existe des comportements plus efficaces (compte tenu de la place de l'aléatoire) qui permettent d'obtenir un TAM minimal.
 
 On pourra songer aussi à modifier d'autres paramètres plus spécifiques du modèle pour en tirer d'autres observations comme la rapidité d'exécution des différentes entités, ou encore la variété (et donc la variabilité) des temps de cuisson / préparation des plats.
-
-
-
-## Mardi 26/02
-
-### Premier modèle
-Dans un premier temps, nous nous essayerons à un modèle simple. Celui-ci se compose de : 
-- Une table de 4 personnes.
-- Un serveur.
-- Une cuisine. 
-- Des clients qui arrivent et remplissent la table.
-
-L'objectif est de coder en une semaine un programme viable, conforme à ce modèle et de décider d'une approche définitive (OOP ou pas..).
-
-#### Résultat
-
-## Mardi 5/03
-
-### Première simulation
-Nous allons maintenant construire une simulation graphique de ce premier modèle, en utilisant le programme précédemment élaboré.
-L'objectif est double : 
-- D'une part, décider d'une charte graphique qui sera maintenue pour le reste du développement.
-- D'autre part, s'essayer aux outils de simulation graphique sous Python et confirmer une approche de la même manière que la semaine précédente.
-
-#### Résultat
