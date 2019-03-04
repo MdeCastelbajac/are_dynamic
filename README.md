@@ -2,9 +2,7 @@
 
 ## RESTAURATION : Optimisation et coordination des tâches
 
-## Mardi 19 février
-
-### Présentation du projet
+## Présentation du projet
 
 Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Recherche Encadrée, l'activité d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
 
