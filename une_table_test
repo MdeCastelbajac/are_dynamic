@@ -82,10 +82,10 @@ def arriv(): #arrivée de clients
                 v+=1
 
 def depart(): #disparition de clients
-    if cellule[0,6]==2:
-        del cibl_cl[Keyval(cl,[0,6])]
-        del cl[Keyval(cl,[0,6])]
-        cellule[0,6]=0
+    if cellule[0,5]==2:
+        del cibl_cl[Keyval(cl,[0,5])]
+        del cl[Keyval(cl,[0,5])]
+        cellule[0,5]=0
 
 def deplac(coord,direct): #gestion d'un déplacement d'une case
     c=coord
@@ -125,14 +125,14 @@ def ciblag(): #gestion des déplacements ciblés
             elif cibl_cl[j][0]>cl[j][0]:
                 cl[j]=deplac(cl[j],3)
 
-def service():
-    global degust
-    if statabl==2:
+def service(): #service de la table
+    global degust,statabl
+    if statabl==2: #table avec plats
         degust+=1
-    elif statabl==1:
+    elif statabl==1: #table sale
         degust=0
     for i in cl:
-        if (cibl_cl[i]==cl[j]) and (cibl_cl[i] in chaises1):
+        if (cibl_cl[i]==cl[i]) and (cibl_cl[i] in chaises1): #clients près des chaises
             Fvp(cl[i],0)
             cl[i]=cibl_cl[i]=chaises[Keyval(chaises1,cl[i])]
             Fvp(chaises[Keyval(chaises,cl[i])],7)
@@ -198,4 +198,8 @@ def tach(): #assignation du serveur aux taches à accomplir
         cibl_serv=cuisines
 
 arriv()
+ciblag()
+service()
+tach()
+depart()
 print(cellule)
