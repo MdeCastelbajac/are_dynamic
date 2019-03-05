@@ -43,7 +43,7 @@ koords = [0,0]
 ## dishes in the last one, while in the cooking one, we'll set a timer which will take into
 ## account the cooking time of every dishes.
 
-to_be_cooked ={}
+to_be_cooked ={} #comment
 cooking = {}
 cooked = {}
 
