@@ -1,3 +1,11 @@
+---
+title: This is my title
+layout: post
+---
+
+Here is my page
+
+
 ## RESTAURATION : Optimisation et coordination des tâches
 
 ## Présentation du projet
