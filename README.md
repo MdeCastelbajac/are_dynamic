@@ -5,7 +5,7 @@ Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Rech
 Nous rappellerons qu'un système complexe est "un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible" (définition du CNRS). Nous détaillerons ci-après les entités, intéractions et comportements de notre modèle.
 
 
-### Description du modèle
+## Description du modèle
 
 Le modèle est bâti autours de cinq points clés : 
 - Les clients qui arrivent aléatoirement.
@@ -18,7 +18,7 @@ Le modèle est bâti autours de cinq points clés :
 
 </p>
 
-### Objectifs
+## Objectifs
 
 On s'aperçoit immédiatement que les comportements respectifs des serveurs et de la cuisine auront une grande influence sur le TAM.
 
