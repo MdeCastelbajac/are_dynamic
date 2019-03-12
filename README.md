@@ -1,5 +1,3 @@
-# ARE DYNAMIC
-
 ## RESTAURATION : Optimisation et coordination des tâches
 
 ## Présentation du projet
