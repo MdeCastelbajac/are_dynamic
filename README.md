@@ -1,14 +1,4 @@
----
-title: This is my title
-layout: post
----
-
-Here is my page
-
-
-## RESTAURATION : Optimisation et coordination des tâches
-
-## Présentation du projet
+# RESTAURATION : Optimisation et coordination des tâches
 
 Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Recherche Encadrée, l'activité d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
 
