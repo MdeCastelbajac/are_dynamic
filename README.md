@@ -28,3 +28,9 @@ On s'aperçoit immédiatement que les comportements respectifs des serveurs et d
 Nous nous demanderons donc s'il existe des comportements plus efficaces (compte tenu de la place de l'aléatoire) qui permettent d'obtenir un TAM minimal.
 
 On pourra songer aussi à modifier d'autres paramètres plus spécifiques du modèle pour en tirer d'autres observations comme la rapidité d'exécution des différentes entités, ou encore la variété (et donc la variabilité) des temps de cuisson / préparation des plats.
+
+
+
+## Pour aller plus loin!
+
+[vous souhaitez en savoir plus sur l'avancée du projet?](Blog.md)
