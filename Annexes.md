@@ -1,1 +1,1 @@
-[Slide de presentation du Projet initial](are_dynamic/Docs/ProjetRestaurant/Presentation Initiale Projet.pdf)
+[Slide de presentation du Projet initial](Docs/ProjetRestaurant/Presentation Initiale Projet.pdf)
