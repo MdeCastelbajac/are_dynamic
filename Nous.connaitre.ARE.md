@@ -3,3 +3,16 @@
 Le projet que nous avons entrepris est né de l'UE denomée ARE du semestre 2 du cursus MIPI de Sorbonne Université (UPMC)
 
 Cette UE est basée 
+
+# 4 premieres séances
+
+# Idées initiales et choix de sujets definitif/ conformes aux crtères
+
+
+
+# Formation Groupe
+
+
+# Membres
+
+@
