@@ -33,4 +33,6 @@ On pourra songer aussi à modifier d'autres paramètres plus spécifiques du mod
 
 ## Pour aller plus loin!
 
-[vous souhaitez en savoir plus sur l'avancée du projet?](Blog.md)
+[Avancée du projet hebdomadaire](Blog.md)
+[Avancées des Objectifs/roadmap](Taches.md)
+[......](Exemples-Annexes.md)
