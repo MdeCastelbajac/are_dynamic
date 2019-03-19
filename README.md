@@ -37,6 +37,8 @@ On pourra songer aussi à modifier d'autres paramètres plus spécifiques du mod
 
 [Avancées des Objectifs/roadmap](Taches.md)
 
-[Exemples d'autres "agent based simulation models" et Ressources](Exemples-Annexes.md)
+[Annexes](Annexes.md)
+
+[Exemples d'autres "agent based simulation models" et Ressources](ExemplesDocu.md)
 
 [Le projet ARE et nous](Nous.connaitre.ARE.md)
