@@ -29,13 +29,17 @@ Nous nous demanderons donc s'il existe des comportements plus efficaces (compte 
 
 On pourra songer aussi à modifier d'autres paramètres plus spécifiques du modèle pour en tirer d'autres observations comme la rapidité d'exécution des différentes entités, ou encore la variété (et donc la variabilité) des temps de cuisson / préparation des plats.
 
+## Utilité
 
+??????
 
 ## Pour aller plus loin!
 
 [Avancée du projet hebdomadaire](Blog.md)
 
 [Avancées des Objectifs/roadmap](Taches.md)
+
+[Fonctionnement/MakingOff](Fonctionnement.md)
 
 [Annexes](Annexes.md)
 
