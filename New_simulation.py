@@ -28,6 +28,7 @@ order_tab = {}
 nb_pop = 1
 filled = []
 empty = []
+command = []
 fill = 0
 accueil = 0
 
@@ -46,20 +47,13 @@ MENU = {"Boeuf Bourguignon" : 20.30,
 def popup_text(num, st, x, y):
     global nb_pop
     if not num in param.pop:
-        popup = room.create_text(x, y,font=('bold', '16'), text = st)
-        param.pop[num] = (popup, st, x, y)
+        param.pop[num] = room.create_text(x, y,font=('bold', '16'), text = st)
         root.update_idletasks()
         root.update()
         tstart['p'+str(num)] = time.time()
         nb_pop += 1
         if nb_pop > 1000:
             nb_pop = 1
-    elif time_now - tstart['p'+str(num)] > 1.0:
-        popup,_,_,_ = param.pop[num]
-        room.delete(popup)
-        root.update_idletasks()
-        root.update()
-        del param.pop[num]
 
 
 #########################################################################################
@@ -188,6 +182,7 @@ class Waiter:
             elif (self.coords[1] != table.coords[1]):
                 y_dir = self.coords[1] - table.coords[1]
                 root.after(20, self.movement_y(y_dir))
+                self.waiting = False
             elif not self.waiting:
                 self.waiting = True
                 tstart['w'+str(self.num)] = time.time()
@@ -196,6 +191,10 @@ class Waiter:
                     self.orders[self.number] = table.order # Waiter just takes the orders coming from the table that called him
                     popup_text(nb_pop, "Order registered", self.coords[0], self.coords[1])
                     self.waiting = False
+                    filled.remove(self.number)
+                    command.append(self.number)
+                    self.number = 0
+                    
 
 
     def go_to_entrance(self):
@@ -311,13 +310,12 @@ class Table:
         # This way it works with both 4 and 2 chairs tables
         if fill == 0:
             fill = self.number
+            tstart['t'+str(self.number)] = time.time()
         if fill == self.number:
             if self.capacity != self.fullcapacity :
-                tstart['t'+str(self.number)] = time.time()
-                if time_now - tstart['t'+str(self.number)] >= 1.000:
+                if time_now - tstart['t'+str(self.number)] >= 0.500:
                     self.capacity += 1
                 if self.capacity == 1:
-                    print('la')
                     self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_1_client)
                     root.update_idletasks()
                     root.update()
@@ -352,6 +350,8 @@ class Table:
         if param.tables[self.number] == 0 and accueil == 2 and fill == 0:
             Table.filling(self)
             param.tables[self.number] = 1
+        elif param.tables[self.number] == 1 and self.number in empty:
+            Table.filling(self)
         elif param.tables[self.number] == 1 and self.number in filled:
             Table.ordering(self)
             param.tables[self.number] = 2
@@ -363,6 +363,8 @@ class Table:
                 tstart['d'+str(self.number)] = 0
         elif param.tables[self.number] == 4:
             param.tables[self.number] = 0
+            empty.append(self.number)
+            command.remove(self.number)
             self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_vide)
             root.update_idletasks()
             root.update()
@@ -396,7 +398,7 @@ waiter_left = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_
 nb_tabl= 1
 nb_serv= 1
 nb_cuis= 1
-interval = 0.1
+interval = 0.01
 temps = 3000
 
 for i in range(1, nb_tabl+1):
@@ -414,27 +416,29 @@ root.update()
 
 def fonc():
     global time_now, param
-    t=0
-    while t < temps:
-        t += 1
-        tstart['sys'] = time.time()
+    tstart['sys'] = time.time()
+    if param.pop != []:
         for i in param.pop:
-            _,a,b,c = param.pop[i]
-            popup_text(i, a, b, c)
-        for i in range(1, nb_tabl+1):
-            exec("%s = %s" % ('table','table'+str(i)))
-            Table.main(table)
-        for i in range(1, nb_serv+1):
-            exec("%s = %s" % ('waiter','waiter'+str(i)))
-            Waiter.activity(waiter)
-        for i in range(1, nb_cuis+1):
-            exec("%s = %s" % ('worktop','worktop'+str(i)))
-            Worktop.cook(worktop)
-        while tstart['sys']+interval > time_now:
-            time_now = time.time()
+            if time_now - tstart['p'+str(i)] > 1.0:
+                room.delete(param.pop[i])
+                root.update_idletasks()
+                root.update()
+    for i in range(1, nb_tabl+1):
+        exec("%s = %s" % ('table','table'+str(i)))
+        Table.main(table)
+    for i in range(1, nb_serv+1):
+        exec("%s = %s" % ('waiter','waiter'+str(i)))
+        Waiter.activity(waiter)
+    for i in range(1, nb_cuis+1):
+        exec("%s = %s" % ('worktop','worktop'+str(i)))
+        Worktop.cook(worktop)
+    while tstart['sys']+interval > time_now:
+        time_now = time.time()
 
-
-fonc()
+t=0
+while t < temps:
+    fonc()
+    t+1
 
 
 root.mainloop()
