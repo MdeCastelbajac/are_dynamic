@@ -44,16 +44,16 @@ MENU = {"Boeuf Bourguignon" : 20.30,
         "Bruceta" : 16.30,
         "Daily Pasta" : 13.30 }
 
-def popup_text(num, st, x, y):
-    global nb_pop
-    if not num in param.pop:
-        param.pop[num] = room.create_text(x, y,font=('bold', '16'), text = st)
-        root.update_idletasks()
-        root.update()
-        tstart['p'+str(num)] = time.time()
-        nb_pop += 1
-        if nb_pop > 1000:
-            nb_pop = 1
+#def popup_text(num, st, x, y):
+#    global nb_pop
+#    if not num in param.pop:
+#        param.pop[num] = room.create_text(x, y,font=('bold', '16'), text = st)
+#        root.update_idletasks()
+#        root.update()
+#        tstart['p'+str(num)] = time.time()
+#        nb_pop += 1
+#        if nb_pop > 1000:
+#            nb_pop = 1
 
 
 #########################################################################################
@@ -107,16 +107,17 @@ class Worktop:
                     if cooking_time > self.time_max:
                         self.time_max = cooking_time
             tstart['c'+str(self.num)] = time.time()
-            popup_text(nb_pop, "Cooking started...", 300, 100)
-            param.kitchen[num] = 2
+#            popup_text(nb_pop, "Cooking started...", 300, 100)
+            param.kitchen[self.num] = 2
         elif param.kitchen[self.num] == 2:
             if time_now - tstart['c'+str(self.num)] >= self.time_max:
-                popup_text(nb_pop, "Done !", 300, 100)
+#                popup_text(nb_pop, "Done !", 300, 100)
                 for number in self.cooking:
                     cooked[number] = self.cooking
                 self.cooking = {}
                 param.kitchen[self.num] = 0
                 self.time_max = 0.0
+                self.cuis = 0
 
 
 #########################################################################################
@@ -189,7 +190,7 @@ class Waiter:
             else:
                 if time_now - tstart['w'+str(self.num)] > 2.0000:
                     self.orders[self.number] = table.order # Waiter just takes the orders coming from the table that called him
-                    popup_text(nb_pop, "Order registered", self.coords[0], self.coords[1])
+#                    popup_text(nb_pop, "Order registered", self.coords[0], self.coords[1])
                     self.waiting = False
                     filled.remove(self.number)
                     command.append(self.number)
@@ -225,14 +226,14 @@ class Waiter:
                 to_be_cooked[i] = self.orders[i]
             self.orders = {}
             self.waiting = False
-            popup_text(nb_pop, (" To be cooked : ",to_be_cooked), 300, 100)
+#            popup_text(nb_pop, (" To be cooked : ",to_be_cooked), 300, 100)
 
 
     def pick_up(self):
         if not self.waiting:
             Waiter.go_to_kitchen(self)
         else:
-            number = cooked.keys()[0]
+            number = random.choice(list(cooked))
             self.delivery = cooked[number]
             del cooked[number]
             self.waiting = False
@@ -246,10 +247,10 @@ class Waiter:
                 x_dir = self.coords[0] - table.coords[0]
                 root.after(20, self.movement_x(x_dir))
             elif (self.coords[1] != table.coords[1]):
-                y_dir = self.coords[1] - self.table.coords[1]
+                y_dir = self.coords[1] - table.coords[1]
                 root.after(20, self.movement_y(y_dir))
             else:
-                popup_text(nb_pop, "Enjoy your meal !", self.coords[0], self.coords[1])
+#                popup_text(nb_pop, "Enjoy your meal !", self.coords[0], self.coords[1])
                 table.img = table.room.create_image(table.coords[0], table.coords[1], image = table_served)
                 param.tables[number] = 3
                 self.delivery = {}
@@ -281,6 +282,7 @@ class Waiter:
             Waiter.collect_order(self)
         elif (param.waiters[self.num] == 5 and self.orders != {}) or (param.waiters[self.num] == 4 and filled == []):
             param.waiters[self.num] = 5
+            Waiter.go_to_kitchen(self)
             Waiter.transmit(self)
 
 
@@ -302,7 +304,7 @@ class Table:
         self.capacity = 0 # How many clients are currently sitting there
         self.order = [] # The clients randomly chose dishes in the MENU
         param.tables[self.number] = 0
-        tstart['d'+str(self.number)] = 0
+        self.degust = False
 
 
     def filling(self):
@@ -333,7 +335,7 @@ class Table:
                     root.update()
                     filled.append(self.number)
                     empty.remove(self.number)
-                    popup_text(nb_pop, "Ready to order !", self.coords[0], self.coords[1])
+#                    popup_text(nb_pop, "Ready to order !", self.coords[0], self.coords[1])
                     param.tables[self.number] = 1
                     fill = 0
 
@@ -356,13 +358,15 @@ class Table:
             Table.ordering(self)
             param.tables[self.number] = 2
         elif param.tables[self.number] == 3:
-            if tstart['d'+str(self.number)] == 0:
-                tstart['d'+str(self.number)] = time.time
+            if not self.degust:
+                tstart['d'+str(self.number)] = time.time()
+                self.degust = True
             if time_now - tstart['d'+str(self.number)] > 5.000:
                 param.tables[self.number] = 4
-                tstart['d'+str(self.number)] = 0
+                self.degust = False
         elif param.tables[self.number] == 4:
             param.tables[self.number] = 0
+            self.capacity = 0
             empty.append(self.number)
             command.remove(self.number)
             self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_vide)
@@ -417,12 +421,12 @@ root.update()
 def fonc():
     global time_now, param
     tstart['sys'] = time.time()
-    if param.pop != []:
-        for i in param.pop:
-            if time_now - tstart['p'+str(i)] > 1.0:
-                room.delete(param.pop[i])
-                root.update_idletasks()
-                root.update()
+#    if param.pop != []:
+#        for i in param.pop:
+#            if time_now - tstart['p'+str(i)] > 1.0:
+#                room.delete(param.pop[i])
+#                root.update_idletasks()
+#                root.update()
     for i in range(1, nb_tabl+1):
         exec("%s = %s" % ('table','table'+str(i)))
         Table.main(table)
