@@ -16,21 +16,18 @@ room.pack()
 
 class Param: # Un ensemble de dictionnaires contenant l'état des objets
     def __init__(self):
-        self.kitchen = {}
-        self.tables = {}
-        self.waiters = {}
-        self.pop = {}
+        self.kitchen = {} #Etat des cuisines
+        self.tables = {} #Etat des tables
+        self.waiters = {} #Etat des serveurs
 
 param = Param()
 tstart = {} # Un dictionnaire contenant des temps de départ
 time_now = time.time() # Le temps présent renouvelé à chaque étape
-order_tab = {}
-nb_pop = 1
-filled = []
-empty = []
-command = []
-fill = 0
-accueil = 0
+filled = [] # La liste des tables remplies
+empty = [] # La liste des tables vides
+command = [] # La liste des tables ayant passé commande
+fill = 0 # Numéro de la table se remplissant (0 par défaut)
+accueil = 0 # Etat de l'accueil des clients
 
 
 # MENU OF DISHES
@@ -43,17 +40,6 @@ MENU = {"Boeuf Bourguignon" : 20.30,
         "Ceasar Salad" : 12.30,
         "Bruceta" : 16.30,
         "Daily Pasta" : 13.30 }
-
-#def popup_text(num, st, x, y):
-#    global nb_pop
-#    if not num in param.pop:
-#        param.pop[num] = room.create_text(x, y,font=('bold', '16'), text = st)
-#        root.update_idletasks()
-#        root.update()
-#        tstart['p'+str(num)] = time.time()
-#        nb_pop += 1
-#        if nb_pop > 1000:
-#            nb_pop = 1
 
 
 #########################################################################################
@@ -74,50 +60,47 @@ entrance = [300.0, 720.0]
 ## account the cooking time of every dishes.
 
 
-to_be_cooked ={}
-cooked = {}
+to_be_cooked ={} # Ce qui est à cuisiner
+cooked = {} # Ce qui est cuisiné
 
 
-class Worktop:
+class Worktop: # Plan de cuisine
 
     def __init__(self, num):
-        self.num = num
-        self.cooking = {}
-        self.time_max = 0.0
-        param.kitchen[self.num] = 0
+        self.num = num # Numéro du plan
+        self.cooking = {} # Ce que le plan cuisine
+        self.time_max = 0.0 # Le temps nécessaire à la cuisine d'une commande
+        param.kitchen[self.num] = 0 # Etat du plan
 
 
     def cook(self):
-        if param.kitchen[self.num] == 0 and to_be_cooked != {}:
+        if param.kitchen[self.num] == 0 and to_be_cooked != {}: # Plan inactif et pouvant servir
             L = []
             for n in to_be_cooked:
                 L.append(n)
-                number = L[0]
-            for order in to_be_cooked[number]:
-                if order in MENU:
+                number = L[0] # Sélection d'une commande
+            for order in to_be_cooked[number]: # Pour chaque plat de la commande
+                if order in MENU: # Transition de la commande à ce qui se cuisine
                     if number in self.cooking:
                         self.cooking[number].append(MENU[order])
                     else:
                         self.cooking[number] = [MENU[order]]
-            param.kitchen[self.num] = 1
-            del to_be_cooked[number]
-        elif param.kitchen[self.num] == 1:
+            param.kitchen[self.num] = 1 # Changement d'état du plan
+            del to_be_cooked[number] # Suppression de la commande dans ce qui est à cuisiner
+        elif param.kitchen[self.num] == 1: # Si le plan s'occuppe d'une commande
             for number in self.cooking:
-                for cooking_time in self.cooking[number]:
-                    if cooking_time > self.time_max:
+                for cooking_time in self.cooking[number]: # Pour chaque temps de cuisson de la commande
+                    if cooking_time > self.time_max: # Sélection du temps le plus élevé
                         self.time_max = cooking_time
-            tstart['c'+str(self.num)] = time.time()
-#            popup_text(nb_pop, "Cooking started...", 300, 100)
+            tstart['c'+str(self.num)] = time.time() # Sauvegarde du temps de début de cuisson
             param.kitchen[self.num] = 2
-        elif param.kitchen[self.num] == 2:
-            if time_now - tstart['c'+str(self.num)] >= self.time_max:
-#                popup_text(nb_pop, "Done !", 300, 100)
+        elif param.kitchen[self.num] == 2: # Si la cuisson est amorcée
+            if time_now - tstart['c'+str(self.num)] >= self.time_max: # Si le temps correspond au temps de cuisson
                 for number in self.cooking:
-                    cooked[number] = self.cooking
-                self.cooking = {}
-                param.kitchen[self.num] = 0
+                    cooked[number] = self.cooking # Transition de la commande à ce qui est cuisiné
+                self.cooking = {} # Suppression de ce qui se cuisine
+                param.kitchen[self.num] = 0 # Retour à l'état inactif
                 self.time_max = 0.0
-                self.cuis = 0
 
 
 #########################################################################################
@@ -129,15 +112,15 @@ class Waiter:
 
     #Initialization
     def __init__(self, num, room):
-        self.num = num
-        self.room = room
-        self.img = self.room.create_image(300, 300, image = waiter_down)
+        self.num = num # Numéro du serveur
+        self.room = room # Placement dans la salle
+        self.img = self.room.create_image(300, 300, image = waiter_down) # Création de l'image
         self.coords = self.room.coords(self.img) # Waiter's real-time coords
         self.orders = {} # Waiter's list of orders
         self.delivery = {} # waiter's list of delivery
-        self.waiting = False
-        self.number = 0
-        param.waiters[self.num] = 0
+        self.waiting = False # Si le serveur attend (indicateur)
+        self.number = 0 # Numéro de la table cible
+        param.waiters[self.num] = 0 # Etat du serveur
 
 
     def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
@@ -173,28 +156,27 @@ class Waiter:
 
 
     def collect_order(self): # Waiter collects a filled table's order
-        if self.number == 0:
-            self.number = filled[0]
-        exec("%s = %s" % ('table','table'+str(self.number)))
-        if param.tables[self.number] == 2:
-            if (self.coords[0] != table.coords[0]+100): # The waiter must close out the distance before collecting the order
-                x_dir = self.coords[0] - table.coords[0]-100
+        if self.number == 0: # Si aucune table cible
+            self.number = filled[0] # Prise pour cible de la table pleine depuis le plus de temps
+        if param.tables[self.number] == 2: # Si la table a commandé
+            if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100):
+                # The waiter must close out the distance before collecting the order
+                x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
                 root.after(20, self.movement_x(x_dir))
-            elif (self.coords[1] != table.coords[1]):
-                y_dir = self.coords[1] - table.coords[1]
+            elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
+                y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
                 root.after(20, self.movement_y(y_dir))
-                self.waiting = False
+                self.waiting = False # Confirmation de non-attente
             elif not self.waiting:
-                self.waiting = True
-                tstart['w'+str(self.num)] = time.time()
+                self.waiting = True # Passage à l'attente
+                tstart['w'+str(self.num)] = time.time() # Départ de la prise de commande
             else:
-                if time_now - tstart['w'+str(self.num)] > 2.0000:
-                    self.orders[self.number] = table.order # Waiter just takes the orders coming from the table that called him
-#                    popup_text(nb_pop, "Order registered", self.coords[0], self.coords[1])
-                    self.waiting = False
-                    filled.remove(self.number)
-                    command.append(self.number)
-                    self.number = 0
+                if time_now - tstart['w'+str(self.num)] > 2.0000: # Prise de commande terminée
+                    self.orders[self.number] = eval("%s" % "table"+str(self.number)).order # Waiter just takes the orders coming from the table that called him
+                    self.waiting = False # Passage à la non-attente
+                    filled.remove(self.number) # La table est transférée de la liste des remplies...
+                    command.append(self.number) #... à  celles ayant passé commande
+                    self.number = 0 # Annulation du ciblage de la table
                     
 
 
@@ -222,66 +204,69 @@ class Waiter:
 
     def transmit(self):
         if(self.coords == koords)and(self.orders!=[]): # Waiter's in the kitchen and has orders to transmit
-            for i in self.orders:
+            for i in self.orders: # Transmission des commandes
                 to_be_cooked[i] = self.orders[i]
-            self.orders = {}
+            self.orders = {} # Stockage des commandes vide
             self.waiting = False
-#            popup_text(nb_pop, (" To be cooked : ",to_be_cooked), 300, 100)
 
 
     def pick_up(self):
         if not self.waiting:
             Waiter.go_to_kitchen(self)
         else:
-            number = random.choice(list(cooked))
-            self.delivery = cooked[number]
+            number = random.choice(list(cooked)) # Il faudra changer cela avec les ordres de priorité
+            self.delivery = cooked[number] # Prise des plats
             del cooked[number]
             self.waiting = False
 
 
     def deliver(self):
-        if self.delivery != {}:
+        if self.delivery != {}: # Si le serveur transporte des plats
             for number in self.delivery:
-                exec("%s = %s" % ('table', 'table'+str(number)))
-            if (self.coords[0] != table.coords[0]+100): # The waiter must close out the distance before collecting the order
-                x_dir = self.coords[0] - table.coords[0]
+                self.number = number
+            if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
+                x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
                 root.after(20, self.movement_x(x_dir))
-            elif (self.coords[1] != table.coords[1]):
-                y_dir = self.coords[1] - table.coords[1]
+            elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
+                y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
                 root.after(20, self.movement_y(y_dir))
             else:
-#                popup_text(nb_pop, "Enjoy your meal !", self.coords[0], self.coords[1])
-                table.img = table.room.create_image(table.coords[0], table.coords[1], image = table_served)
-                param.tables[number] = 3
-                self.delivery = {}
+                eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
+                param.tables[number] = 3 # La table est servie
+                self.delivery = {} # Le serveur ne transporte rien
 
 
     def activity(self):
         global accueil
         if param.waiters[self.num] == 0 and empty != [] and accueil == 0:
+            # Si le serveur est libre, que des tables dont libres et que personne ne s'occupe de l'entrée
             param.waiters[self.num] = 1
-            accueil = 1
+            accueil = 1 # Quelqu'un se dirige vers l'entrée
             Waiter.go_to_entrance(self)
-        elif param.waiters[self.num] == 1 and empty != []:
+        elif param.waiters[self.num] == 1 and empty != []: # Si le serveur se dirige vers l'entrée
             Waiter.go_to_entrance(self)
-            if self.coords == entrance:
-                accueil = 2
-        elif param.waiters[self.num] == 1 and empty == []:
-            param.waiters[self.num] = 0
-            accueil = 0
+            if self.coords == entrance: # Le serveur est arrivé à l'entrée
+                accueil = 2 # Quelqu'un accueille les clients
+        elif param.waiters[self.num] == 1 and empty == []: # Si toutes les tables sont pleines
+            param.waiters[self.num] = 0 # Le serveur devient inactif
+            accueil = 0 # Personne ne s'occupe de l'entrée
         elif (param.waiters[self.num] == 3 and self.delivery == {}) or (param.waiters[self.num] == 5 and self.orders == {}):
             param.waiters[self.num] = 0
         elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 2) and self.delivery == {} and cooked != {}:
-            param.waiters[self.num] = 2
+            # Le serveur est disponible et des commandes sont prètes à être servies
+            param.waiters[self.num] = 2 # Le serveur va chercher les plats
             Waiter.pick_up(self)
         elif (param.waiters[self.num] == 2 or param.waiters[self.num] == 3) and self.delivery != {}:
-            param.waiters[self.num] = 3
+            # Le serveur a des plats en main
+            param.waiters[self.num] = 3 # Le serveur livre les plats
             Waiter.deliver(self)
         elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 4) and filled != []:
-            param.waiters[self.num] = 4
+            # Le serveur est disponible et des tables peuvent commander
+            param.waiters[self.num] = 4 # Le serveur va noter les commandes
             Waiter.collect_order(self)
         elif (param.waiters[self.num] == 5 and self.orders != {}) or (param.waiters[self.num] == 4 and filled == []):
-            param.waiters[self.num] = 5
+            # Le serveur a pris des commandes
+            param.waiters[self.num] = 5 # Le serveur les transmet aux cuisines
             Waiter.go_to_kitchen(self)
             Waiter.transmit(self)
 
@@ -294,27 +279,27 @@ class Waiter:
 class Table:
 
     #initialization
-    def __init__(self, room, image, number, fullcapacity):
+    def __init__(self, room, image, coords, number, fullcapacity):
         self.room = room
-        self.img = self.room.create_image(100, 270, image = table_vide)
+        self.img = self.room.create_image(coords[0], coords[1], image = table_vide)
         self.image = image
         self.number = number # The table's number is necessary to register orders and deliver dishes at the right place
-        self.coords = self.room.coords(self.img) # The table's coords : same necessity
+        self.coords = coords # The table's coords : same necessity
         self.fullcapacity = fullcapacity # How many clients are needed to fill the table
         self.capacity = 0 # How many clients are currently sitting there
         self.order = [] # The clients randomly chose dishes in the MENU
-        param.tables[self.number] = 0
-        self.degust = False
+        param.tables[self.number] = 0 # Etat de la table
+        self.degust = False # Si les clients mangent
 
 
     def filling(self):
         global time_now, fill
         # This way it works with both 4 and 2 chairs tables
-        if fill == 0:
-            fill = self.number
-            tstart['t'+str(self.number)] = time.time()
+        if fill == 0: # Si aucune table ne se remplit
+            fill = self.number # La table se remplit
+            tstart['t'+str(self.number)] = time.time() # Début du remplissage
         if fill == self.number:
-            if self.capacity != self.fullcapacity :
+            if self.capacity != self.fullcapacity : # Si la table n'est pas remplie
                 if time_now - tstart['t'+str(self.number)] >= 0.500:
                     self.capacity += 1
                 if self.capacity == 1:
@@ -333,9 +318,8 @@ class Table:
                     self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_4_client)
                     root.update_idletasks()
                     root.update()
-                    filled.append(self.number)
-                    empty.remove(self.number)
-#                    popup_text(nb_pop, "Ready to order !", self.coords[0], self.coords[1])
+                    filled.append(self.number) # La table est rmplie
+                    empty.remove(self.number) # La table n'est plus vide
                     param.tables[self.number] = 1
                     fill = 0
 
@@ -350,25 +334,26 @@ class Table:
     def main(self):
         global time_now
         if param.tables[self.number] == 0 and accueil == 2 and fill == 0:
+            # Si la table est vide et qu'un serveur est à l'accueil
             Table.filling(self)
             param.tables[self.number] = 1
-        elif param.tables[self.number] == 1 and self.number in empty:
+        elif param.tables[self.number] == 1 and self.number in empty: # La table se remplit
             Table.filling(self)
-        elif param.tables[self.number] == 1 and self.number in filled:
+        elif param.tables[self.number] == 1 and self.number in filled: # La table est pleine
             Table.ordering(self)
-            param.tables[self.number] = 2
-        elif param.tables[self.number] == 3:
+            param.tables[self.number] = 2 # La table est prète à commander
+        elif param.tables[self.number] == 3: # La table a été servie
             if not self.degust:
                 tstart['d'+str(self.number)] = time.time()
                 self.degust = True
             if time_now - tstart['d'+str(self.number)] > 5.000:
-                param.tables[self.number] = 4
+                param.tables[self.number] = 4 # Les clients ont fini de manger
                 self.degust = False
         elif param.tables[self.number] == 4:
-            param.tables[self.number] = 0
+            param.tables[self.number] = 0 # La table est vide
             self.capacity = 0
             empty.append(self.number)
-            command.remove(self.number)
+            command.remove(self.number) # La table n'a plus de commande
             self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_vide)
             root.update_idletasks()
             root.update()
@@ -399,45 +384,43 @@ waiter_left = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_
 
 # OUR AGENTS
 # Our table
+# Nombres de tables, serveurs et plans de cuisine
 nb_tabl= 1
 nb_serv= 1
 nb_cuis= 1
-interval = 0.01
-temps = 3000
+
+# Gestion du temps
+
+interval = 0.001 # Intervalle minimum de temps
+temps = 3000 # Nombre d'étapes
 
 for i in range(1, nb_tabl+1):
-    exec("%s = %s = %s" % ('table','table'+str(i),'Table(room, table_vide, i, 4)'))
-    empty.append(table.number)
+    if i%2 == 1:
+        exec("%s = %s" % ('table'+str(i),'Table(room, table_vide, [100, 260+110*(i//2)], i, 4)'))
+    else:
+        exec("%s = %s" % ('table'+str(i),'Table(room, table_vide, [490, 260+110*(i//2-1)], i, 4)'))
+    exec("empty.append(table"+str(i)+".number)")
 
 for i in range(1, nb_serv+1):
-    exec("%s = %s = %s" % ('waiter','waiter'+str(i),'Waiter(i, room)'))
+    exec("%s = %s" % ('waiter'+str(i),'Waiter(i, room)'))
 
 for i in range(1, nb_cuis+1):
-    exec("%s = %s = %s" % ('worktop','worktop'+str(i),'Worktop(i)'))
+    exec("%s = %s" % ('worktop'+str(i),'Worktop(i)'))
 
 root.update_idletasks()
 root.update()
 
 def fonc():
-    global time_now, param
-    tstart['sys'] = time.time()
-#    if param.pop != []:
-#        for i in param.pop:
-#            if time_now - tstart['p'+str(i)] > 1.0:
-#                room.delete(param.pop[i])
-#                root.update_idletasks()
-#                root.update()
+    global time_now, param, table
+    tstart['sys'] = time.time() # Début de l'étape
     for i in range(1, nb_tabl+1):
-        exec("%s = %s" % ('table','table'+str(i)))
-        Table.main(table)
+        exec("%s" % ("Table.main(table"+str(i)+")"))
     for i in range(1, nb_serv+1):
-        exec("%s = %s" % ('waiter','waiter'+str(i)))
-        Waiter.activity(waiter)
+        exec("%s" % ("Waiter.activity(waiter"+str(i)+")"))
     for i in range(1, nb_cuis+1):
-        exec("%s = %s" % ('worktop','worktop'+str(i)))
-        Worktop.cook(worktop)
+        exec("%s" % ("Worktop.cook(worktop"+str(i)+")"))
     while tstart['sys']+interval > time_now:
-        time_now = time.time()
+        time_now = time.time() # Temps actuel
 
 t=0
 while t < temps:
