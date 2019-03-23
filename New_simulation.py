@@ -232,6 +232,8 @@ class Waiter:
                 root.after(20, self.movement_y(y_dir))
             else:
                 eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
+                root.update_idletasks()
+                root.update()
                 param.tables[number] = 3 # La table est servie
                 self.delivery = {} # Le serveur ne transporte rien
 
