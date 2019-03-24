@@ -1,7 +1,4 @@
 
-import random
-import time
-from tkinter import *
 
 class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'un seul plat simultanément
 
@@ -14,6 +11,7 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
          self.case = (0,0.0)  # Plat dans le four (+ numéro de table)
          self.filled = False
          self.aside = [] # Liste de tuple de réserve
+         self.indice_case = 0 # Permet de garder en memoire l'emplacement du plat pioché dans cooking
          #Param ...
 
     #def global_timer_per_table(self
@@ -36,6 +34,10 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
      après seconde dans la liste avec une update.
 
      Exemple : On prend toujours le un four prend toujours le timer disponible le plus haut (dans sa réserve ou dans la liste)"""
+     def tictoc(self):
+          """ fait baisser le timer présent dans un four"""
+          self.case[1] -= 1.0
+
 
      def cook(self):
          # On détermine le timer disponible le plus haut
@@ -51,15 +53,45 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
                  if self.aside == []: # La réserve est vide
                      self.aside = self.case
                      self.case = cooking[i]
-                     cooking[i][2] = True # Le timer est pioché
+                     self.indice_case = indice
+                     cooking[indice][2] = True # Le timer est pioché
              # Sinon on ne fait rien et on attend que les timers décroissent
          else: # Le four est vide
-             self.case = cooking[i]
-             cooking[i][2] = True # Le timer est pioché
+             self.case = cooking[indice]
+             cooking[indice][2] = True # Le timer est pioché
+             self.indice_case = indice
+
+         if self.case[1] <= 1.0:
+            if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
+                self.case = []
+            # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
+            else:
+                root.after(10 * self.case[1], tictoc()) #Permet de faire décroitre les dernieres decimales de facon realiste.
+
 
          cooking[i][1] -= 1.0
          root.after(1000, tictoc()) # Après 1 seconde, on décrémente le timer d'une seconde
 
-     def tictoc(self, i):
-         """ fait baisser le timer présent dans un four"""
-         self.case[1] -= 1.0
+         """ Je n'ai pas trouvé le moyen de limiter la durée de la réserve pour l'instant : à voir """
+
+
+    def check_ready():
+        """ vérifie si la commande d'une table est prête. Si oui, alors elle donne elle appelle le serveur et supprime les timers
+        et les plats de ses listes to_be_cooked et cooking"""
+
+
+        for i in to_be_cooked:
+            for tuple in cooking:
+                if tuple[0] == i:
+                    if not(tuple[1] <= 0.0):
+                        return None # Si non
+            indice = i
+        # Si oui
+        waiter.go_to_kitchen()
+        #waiter.call[0] = i.... on lui refile les coordonnees de la table, à voir mardi avec Florian
+        for indice in to_be_cooked:
+            for tuple in cooking:
+                if tuple[0] == indice :
+                    cooking.remove(tuple)
+        to_be_cooked[indice] = {}
+        # On clear toute la commande des deux listes et dictionnaires
