@@ -12,7 +12,7 @@ Les quatres premières seances étaient axées sur un travail en binomes sur la 
 
 Voici le fichier Jupyter:
 
-[Travail initial sur des Dynamiques de population](are_dynamic/Docs/AREDynamic/Dynamique de Population.ipynb)
+[Travail initial sur des Dynamiques de population](Docs/AREDynamic/Dynamique de Population.ipynb)
 
 # Idées initiales et choix de sujets definitif/ conformes aux critères
 
