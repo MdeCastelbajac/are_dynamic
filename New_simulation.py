@@ -61,7 +61,7 @@ entrance = [300.0, 720.0]
 
 
 to_be_cooked ={} # Ce qui est à cuisiner
-cooked = {} # Ce qui est cuisiné
+cooked = [] # Ce qui est cuisiné
 
 
 class Worktop: # Plan de cuisine
@@ -97,7 +97,7 @@ class Worktop: # Plan de cuisine
         elif param.kitchen[self.num] == 2: # Si la cuisson est amorcée
             if time_now - tstart['c'+str(self.num)] >= self.time_max: # Si le temps correspond au temps de cuisson
                 for number in self.cooking:
-                    cooked[number] = self.cooking # Transition de la commande à ce qui est cuisiné
+                    cooked.append(number) # Transition de la commande à ce qui est cuisiné
                 self.cooking = {} # Suppression de ce qui se cuisine
                 param.kitchen[self.num] = 0 # Retour à l'état inactif
                 self.time_max = 0.0
@@ -117,7 +117,7 @@ class Waiter:
         self.img = self.room.create_image(300, 300, image = waiter_down) # Création de l'image
         self.coords = self.room.coords(self.img) # Waiter's real-time coords
         self.orders = {} # Waiter's list of orders
-        self.delivery = {} # waiter's list of delivery
+        self.delivery = 0 # waiter's list of delivery
         self.waiting = False # Si le serveur attend (indicateur)
         self.number = 0 # Numéro de la table cible
         param.waiters[self.num] = 0 # Etat du serveur
@@ -214,28 +214,26 @@ class Waiter:
         if not self.waiting:
             Waiter.go_to_kitchen(self)
         else:
-            number = random.choice(list(cooked)) # Il faudra changer cela avec les ordres de priorité
-            self.delivery = cooked[number] # Prise des plats
-            del cooked[number]
+            self.delivery = cooked[0] # Prise des plats
+            cooked.remove(cooked[0])
             self.waiting = False
 
 
     def deliver(self):
-        if self.delivery != {}: # Si le serveur transporte des plats
-            for number in self.delivery:
-                self.number = number
-            if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
-                x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
-                root.after(20, self.movement_x(x_dir))
-            elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
-                y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
-                root.after(20, self.movement_y(y_dir))
-            else:
-                eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
-                root.update_idletasks()
-                root.update()
-                param.tables[number] = 3 # La table est servie
-                self.delivery = {} # Le serveur ne transporte rien
+        if self.delivery != 0: # Si le serveur transporte des plats
+            self.number = self.delivery
+        if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
+            x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
+            root.after(20, self.movement_x(x_dir))
+        elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
+            y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
+            root.after(20, self.movement_y(y_dir))
+        else:
+            eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
+            root.update_idletasks()
+            root.update()
+            param.tables[self.number] = 3 # La table est servie
+            self.delivery = 0 # Le serveur ne transporte rien
 
 
     def activity(self):
@@ -252,13 +250,13 @@ class Waiter:
         elif param.waiters[self.num] == 1 and empty == []: # Si toutes les tables sont pleines
             param.waiters[self.num] = 0 # Le serveur devient inactif
             accueil = 0 # Personne ne s'occupe de l'entrée
-        elif (param.waiters[self.num] == 3 and self.delivery == {}) or (param.waiters[self.num] == 5 and self.orders == {}):
+        elif (param.waiters[self.num] == 3 and self.delivery == 0) or (param.waiters[self.num] == 5 and self.orders == {}):
             param.waiters[self.num] = 0
-        elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 2) and self.delivery == {} and cooked != {}:
+        elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 2) and self.delivery == 0 and cooked != []:
             # Le serveur est disponible et des commandes sont prètes à être servies
             param.waiters[self.num] = 2 # Le serveur va chercher les plats
             Waiter.pick_up(self)
-        elif (param.waiters[self.num] == 2 or param.waiters[self.num] == 3) and self.delivery != {}:
+        elif (param.waiters[self.num] == 2 or param.waiters[self.num] == 3) and self.delivery != 0:
             # Le serveur a des plats en main
             param.waiters[self.num] = 3 # Le serveur livre les plats
             Waiter.deliver(self)
@@ -387,7 +385,7 @@ waiter_left = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_
 # OUR AGENTS
 # Our table
 # Nombres de tables, serveurs et plans de cuisine
-nb_tabl= 1
+nb_tabl= 2
 nb_serv= 1
 nb_cuis= 1
 
