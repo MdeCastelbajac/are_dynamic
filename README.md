@@ -32,7 +32,7 @@ On pourra songer aussi à modifier d'autres paramètres plus spécifiques du mod
 
 ## Utilité
 
-Cette etude du TAM en fonction des parametres fixes et variables d'un restaurtant permettrait à un restaurateur d'estimer ses besoins selon la configuration du restaurant, de l'afflux estimé de client et de sa carte. Ainsi il serait possible d'estimer le nombre de serveur optimal ainsi que des besoins en cuisine. On pourrait donc imaginer economiser du temps et de l'argent dans la gestion/l'ouverture d'un restaurant!
+Cette etude du TAM en fonction des parametres fixes et variables d'un restaurtant permettrait à un restaurateur d'estimer ses besoins selon la configuration du restaurant, de l'afflux estimé de client et de sa carte. Ainsi il serait possible d'estimer le nombre de serveur optimal ainsi que des besoins en cuisine. On pourrait donc imaginer economiser du temps et de l'argent dans la gestion/l'ouverture d'un restaurant.
 
 ## Pour aller plus loin!
 
