@@ -10,8 +10,9 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
          self.num = num # Pour repérer les fours
          self.case = (0,0.0)  # Plat dans le four (+ numéro de table)
          self.filled = False
-         self.aside = [] # Liste de tuple de réserve
+         self.aside = () # Liste de tuple de réserve
          self.indice_case = 0 # Permet de garder en memoire l'emplacement du plat pioché dans cooking
+         self.indice_aside = 0 # Permet de garder en memoire l'emplacement du plat en reserve dans cooking
          #Param ...
 
     #def global_timer_per_table(self
@@ -24,7 +25,7 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
 
      def constr_list():
 
-         k = 0 # indice de la nouvelle liste
+         k = len(cooking) # indice de la nouvelle liste
          for i in to_be_cooked:
              for j in to_be_cooked[i]:
                  cooking[k] = (i, to_be_cooked[i][j]) # On forme des tuples num_table / timer
@@ -52,21 +53,28 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
              if time_max > case[1]:
                  if self.aside == []: # La réserve est vide
                      self.aside = self.case
+                     self.indice_aside = self.indice_case
                      self.case = cooking[i]
                      self.indice_case = indice
                      cooking[indice][2] = True # Le timer est pioché
-             # Sinon on ne fait rien et on attend que les timers décroissent
+
          else: # Le four est vide
-             self.case = cooking[indice]
-             cooking[indice][2] = True # Le timer est pioché
-             self.indice_case = indice
+            if self.aside != ():
+                self.indice_case = self.indice_aside
+                self.case = self.aside
+                self.aside = ()
+
+            else :
+                self.case = cooking[indice]
+                cooking[indice][2] = True # Le timer est pioché
+                self.indice_case = indice
 
          if self.case[1] <= 1.0:
             if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
                 self.case = []
             # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
             else:
-                root.after(10 * self.case[1], tictoc()) #Permet de faire décroitre les dernieres decimales de facon realiste.
+                root.after(1000 * self.case[1], tictoc()) #Permet de faire décroitre les dernieres decimales de facon realiste.
 
 
          cooking[i][1] -= 1.0
