@@ -1,12 +1,12 @@
 import random
 import time
 from tkinter import *
-
+import copy
 
 #Room
 
 root = Tk()
-img_bg = PhotoImage(file = "C:\\Users\\Florian\\Pictures\\ARE_images\\rest_room_bg.gif")
+img_bg = PhotoImage(file = "Images/rest_room_bg.gif")
 room = Canvas(width = 600, height = 800)
 instance_bg = room.create_image(300, 400, image = img_bg)
 room.pack()
@@ -223,17 +223,27 @@ class Waiter:
 
     def movement_y(self, y_dir): # we update the waiter's image when the function starts
         if y_dir > 0:
-            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_up)
-            self.room.move(self.img, 0, -5)
+            if self.coords[0] > 330:
+                self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_up)
+                self.room.move(self.img, 0, -5)
+                root.update_idletasks()
+                root.update()
+                self.coords = self.room.coords(self.img)
+            elif self.coords[0] <= 330:
+                Waiter.movement_x(self, -1)
+                root.update_idletasks()
+                root.update()
+
+        elif y_dir !=0 and self.coords[0] < 260:
+                self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_down)
+                self.room.move(self.img, 0, 5)
+                root.update_idletasks()
+                root.update()
+                self.coords = self.room.coords(self.img)
+        elif self.coords[0] >= 260 :
+            Waiter.movement_x(self, 1)
             root.update_idletasks()
             root.update()
-            self.coords = self.room.coords(self.img)
-        elif y_dir !=0:
-            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_down)
-            self.room.move(self.img, 0, 5)
-            root.update_idletasks()
-            root.update()
-            self.coords = self.room.coords(self.img)
 
 
     def collect_order(self): # Waiter collects a filled table's order
@@ -242,13 +252,14 @@ class Waiter:
             filled.remove(self.number)
             pris.append(self.number)
         if param.tables[self.number] == 2: # Si la table a commandé
-            if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100):
+            if (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
+                y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
+                root.after(20, self.movement_y(y_dir))
+
+            elif (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100):
                 # The waiter must close out the distance before collecting the order
                 x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
                 root.after(20, self.movement_x(x_dir))
-            elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
-                y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
-                root.after(20, self.movement_y(y_dir))
                 self.waiting = False # Confirmation de non-attente
             elif not self.waiting:
                 self.waiting = True # Passage à l'attente
@@ -260,27 +271,28 @@ class Waiter:
                     pris.remove(self.number) # La table est transférée de la liste des remplies...
                     command.append(self.number) #... à  celles ayant passé commande
                     self.number = 0 # Annulation du ciblage de la table
-                    
+
 
 
     def go_to_entrance(self):
-        if(self.coords[0] != entrance[0]):
-            x_dir = self.coords[0] - entrance[0]
-            root.after(20, self.movement_x(x_dir))
-        elif(self.coords[1] != entrance[1]):
+        if(self.coords[1] != entrance[1]):
             y_dir = self.coords[1] - entrance[1]
             root.after(20, self.movement_y(y_dir))
+        elif(self.coords[0] != entrance[0]):
+            x_dir = self.coords[0] - entrance[0]
+            root.after(20, self.movement_x(x_dir))
         else:
             self.waiting = True
 
 
     def go_to_kitchen(self):
-        if self.coords[0] != koords[0]: # The waiter goes back to the kitchens to give the order he collected
-            x_dir = self.coords[0] - koords[0]
-            root.after(20, self.movement_x(x_dir))
-        elif self.coords[1] != koords[1]:
+
+        if self.coords[1] != koords[1]:
             y_dir = self.coords[1] - koords[1]
             root.after(20, self.movement_y(y_dir))
+        elif self.coords[0] != koords[0]: # The waiter goes back to the kitchens to give the order he collected
+            x_dir = self.coords[0] - koords[0]
+            root.after(20, self.movement_x(x_dir))
         else:
             self.waiting = True
 
@@ -306,12 +318,13 @@ class Waiter:
     def deliver(self):
         if self.delivery != 0: # Si le serveur transporte des plats
             self.number = self.delivery
-        if (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
-            x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
-            root.after(20, self.movement_x(x_dir))
-        elif (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
+        if (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
             y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
             root.after(20, self.movement_y(y_dir))
+
+        elif (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
+            x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
+            root.after(20, self.movement_x(x_dir))
         else:
             eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
             root.update_idletasks()
@@ -454,19 +467,17 @@ class Table:
 #                                     I M A G E S                                       #
 #########################################################################################
 
+table_vide = PhotoImage(file="~/ARE_DYNAMIC/Images/table_4.gif")
+table_1_client = PhotoImage(file="~/ARE_DYNAMIC/Images/table_1_client.gif")
+table_2_client = PhotoImage(file="~/ARE_DYNAMIC/Images/table_2_client.gif")
+table_3_client = PhotoImage(file="~/ARE_DYNAMIC/Images/table_3_client.gif")
+table_4_client = PhotoImage(file="~/ARE_DYNAMIC/Images/table_4_client.gif")
+table_served = PhotoImage(file="~/ARE_DYNAMIC/Images/table_served.gif")
 
-table_vide = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_4.gif")
-table_1_client = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_1_client.gif")
-table_2_client = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_2_client.gif")
-table_3_client = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_3_client.gif")
-table_4_client = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_4_client.gif")
-table_served = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\table_served.gif")
-
-waiter_down = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_down.gif")
-waiter_up = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_up.gif")
-waiter_right = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_right.gif")
-waiter_left = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_left.gif")
-
+waiter_down = PhotoImage(file="~/ARE_DYNAMIC/Images/waiter_down.gif")
+waiter_up = PhotoImage(file="~/ARE_DYNAMIC/Images/waiter_up.gif")
+waiter_right = PhotoImage(file="~/ARE_DYNAMIC/Images/waiter_right.gif")
+waiter_left = PhotoImage(file="~/ARE_DYNAMIC/Images/waiter_left.gif")
 
 #########################################################################################
 #                                      R U N N I N G                                    #
@@ -479,7 +490,6 @@ waiter_left = PhotoImage(file="C:\\Users\\Florian\\Pictures\\ARE_images\\waiter_
 nb_tabl= 2
 nb_serv= 2
 nb_cuis= 4
-
 # Gestion du temps
 
 interval = 0.01 # Intervalle minimum de temps
@@ -521,3 +531,4 @@ while t < temps:
 
 
 root.mainloop()
+
