@@ -30,8 +30,8 @@ Initialement nous étions deux binomes Matthieu/Sandor et Rayan/Florian.
 
 # Membres
 
--Matthieu de Castelbajac
--Florian Archambaud
--Sandor Genot
--Rayan Zahem
+- Matthieu de Castelbajac
+- Florian Archambaud
+- Sandor Genot
+- Rayan Zahem
 
