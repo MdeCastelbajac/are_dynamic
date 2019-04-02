@@ -8,7 +8,7 @@ Cette UE se decline sous differentes formes. Celle dans laquelle nous sommes est
 
 # 4 premieres séances
 
-Les quatres premières seances étaient axées sur un travail en binomes sur la simulation en python de dynamiques de population. ceci dans l'idée d'introduire la notion de systeemes dynamique, ainsi que certaines specifités de programmation en Python.
+Les quatres premières seances étaient axées sur un travail en binomes sur la simulation en python de dynamiques de population. ceci dans l'idée d'introduire la notion de systemes dynamiques, ainsi que certaines specifités de programmation en Python.
 
 Voici le fichier Jupyter:
 
