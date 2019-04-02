@@ -16,7 +16,7 @@ Voici le fichier Jupyter:
 
 # Idées initiales et choix de sujets definitif/ conformes aux critères
 
-Initialement en binomes les groupes de l'ARE ont du reflechir à un sujet autour des systemes complexes sur lesquels travailler en groupe de quatre. Il a donc fallu faire un tri et choisir le sujet qui parraissait interessant et qui soit à difficuolté suffisamment modulable pour que celle ci puisse etre progressive.
+Initialement en binomes les groupes de l'ARE ont du reflechir à un sujet autour des systemes complexes sur lesquels travailler en groupe de quatre. Il a donc fallu faire un tri et choisir le sujet qui parraissait interessant et qui soit à difficulté suffisamment modulable pour que celle ci puisse etre progressive.
 
 Nous avions donc pensé à la gestion de la circulation sur les autoroutes, à des simulations proies/predateurs, et la simulation d'un restaurant.
 
