@@ -115,12 +115,69 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
             print(self.case)
 
 
+    def cook(self):
+        # On détermine le timer disponible le plus haut
+        if cooking != []:
+            print("", self.num)
+            time_max = 0.0
+            indice = 0
+
+            for i in range(len(cooking)):
+                if cooking[i][1] > time_max and not(cooking[i][2]):
+                    time_max = cooking[i][1]
+                    indice = i
+
+
+            if self.filled: # Le four est déjà plein
+                if time_max > case[1]:
+                    if self.aside == (): # La réserve est vide
+                        self.aside = self.case
+                        self.case = cooking[i]
+                        self.indice_case = indice
+                        (_,_,piocher) = cooking[indice]
+                        piocher = True# Le timer est pioché
+                    # Sinon on ne fait rien et on attend que les timers décroissent
+            else: # Le four est vide
+                if self.aside != ():
+                    self.indice_case = self.indice_aside
+                    self.case = self.aside
+                    self.aside = ()
+                else:
+                    self.case = cooking[indice]
+                    (_,a,piocher) = cooking[indice]
+                    piocher = True  # Le timer est pioché
+                    self.indice_case = indice
+            if self.case[1] <= 1.0:
+                if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
+                    self.case = ()
+                    (a,b,c) = cooking[indice]
+                    cooking[indice] = (a,0.0,c)
+                    # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
+                else:
+                    (a,b,c) = cooking[indice]
+                    cooking[indice] = (a,0.0,c)
+                    Furnace.tictoc(self)
+                    #root.after(1000 * self.case[1], Furnace.tictoc(self)) #Permet de faire décroitre les dernieres decimales de facon realiste.
+
+            Furnace.check_ready()
+            (a,b,c) = cooking[indice]
+            cooking[indice] = (a,b-1,c)
+            for (o,e,_) in cooking:
+                print("", o, e)
+
+            #Furnace.tictoc(self)
+            root.after(int(1000/nb_cuis), Furnace.tictoc(self)) # Après 1 seconde, on décrémente le timer d'une seconde
+
+
+        """ Je n'ai pas trouvé le moyen de limiter la durée de la réserve pour l'instant : à voir """
+
+
     def check_ready():
         """ vérifie si la commande d'une table est prête. Si oui, alors elle donne elle appelle le serveur et supprime les timers
         et les plats de ses listes to_be_cooked et cooking"""
 
-
-        for i in to_be_cooked:
+        Dtemp = copy.deepcopy(to_be_cooked)
+        for i in Dtemp:
             for tupl in cooking:
                 if tupl[0] == i:
                     if not(tupl[1] <= 0.0):
@@ -130,59 +187,10 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
             cooked.append(i)
             for indice in to_be_cooked:
                 for tupl in cooking:
-                    if tupl[0] == indice:
+                    if tupl[0] == indice :
                         cooking.remove(tupl)
             del to_be_cooked[indice]
-            inside.remove(i)
             # On clear toute la commande des deux listes et dictionnaires
-
-
-    def cook(self):
-        if cooking != []:
-            # On détermine le timer disponible le plus haut
-            time_max = 0.0
-            indice = 0
-            for i in range(0,len(cooking)-1):
-                if cooking[i][1] > time_max and not(cooking[i][2]):
-                    time_max = cooking[i][1]
-                    indice = i
-            if self.filled: # Le four est déjà plein
-                if time_max > case[1]:
-                    if self.aside == (): # La réserve est vide
-                        self.aside = self.case
-                        self.case = cooking[i]
-                        self.indice_case = indice
-                        a,b,_ = cooking[indice]
-                        cooking[indice] = (a,b,True) # Le timer est pioché
-                # Sinon on ne fait rien et on attend que les timers décroissent
-            else: # Le four est vide
-                if self.aside != ():
-                    self.indice_case = self.indice_aside
-                    self.case = self.aside
-                    self.aside = ()
-                else:
-                    self.case = cooking[indice]
-                    a,b,_ = cooking[indice]
-                    cooking[indice] = (a,b,True) # Le timer est pioché
-                    self.indice_case = indice
-            if self.case[1] <= 1.0:
-                if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
-                    self.case = ()
-                    a,_,c = cooking[indice]
-                    cooking[indice] = (a,0.0,c)
-                # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
-                else:
-                    #root.after(100 * self.case[1], Furnace.tictoc(self)) #Permet de faire décroitre les dernieres decimales de facon realiste.
-                    a,_,c = cooking[indice]
-                    cooking[indice] = (a,0.0,c)
-            a,b,c = cooking[indice]
-            cooking[indice] = (a,b-1.0,c)
-            Furnace.check_ready()
-            root.after(100, Furnace.tictoc(self)) # Après 1 seconde, on décrémente le timer d'une seconde
-
-
-            """ Je n'ai pas trouvé le moyen de limiter la durée de la réserve pour l'instant : à voir """
-
 
 #########################################################################################
 #                                     W A I T E R S                                     #
