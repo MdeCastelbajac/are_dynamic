@@ -7,7 +7,12 @@ Selon wikipedia:
 Vous avez ici des ressources sur ce sujet ainsi que des exemples d'applications de ce modele.
 
 
-# Ressources
+# Les origines de l'ABM
+
+Les premières simulations de ce type sont particulierement recentes. En effet celle ci étant dépendantes d'une certaine capacité de calcul.
+L'idée de l'ABM puise sa source dans bon nombre de theorie prééxistantes comme la "game theory", ou encore " les methodes de Monte Carlo". Les premières traces theoriques de l'ABM datent de 1940, et les premières simulations ont existé depuis les années 1990.
+
+
 
 
 
@@ -34,18 +39,15 @@ Exemples d'ABM utilisant AnyLogic:
   - 
   -
 
+# Applications scientifiques
 
+-
+  
+  
+# Ressources
 
+Il existe de nombreuses documentations sur ce type de simultation. Voici quelques pistes:
   
-  
-
-Ressources:
-  lien wikipedia
-  https://en.wikipedia.org/wiki/Agent-based_model
-  
-  
-Ouvrages:
-
-  Life in sync
-  
+  - [Wikipedia](https://en.wikipedia.org/wiki/Agent-based_model)
+  - Ouvrage: "Sync: How Order Emerges from Chaos in the Universe, Nature, and Daily Life" Par Steven Strogatz
   
