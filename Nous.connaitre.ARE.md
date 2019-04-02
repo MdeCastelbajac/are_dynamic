@@ -1,31 +1,31 @@
 # Cadre du Projet
 
-Le projet que nous avons entrepris est né de l'UE denomée 'ARE' du semestre 2 du cursus MIPI de Sorbonne Université (UPMC).
+Le projet que nous avons entrepris est né de l'UE dénommée 'ARE' du semestre 2 du cursus MIPI de Sorbonne Université (UPMC).
 
 L'ARE ou encore Atelier de Recherche Encadrée est une UE dans laquelle l'on travaille en groupe sur un thème relatif à deux disciplines!
 
-Cette UE se decline sous differentes formes. Celle dans laquelle nous sommes est l'ARE Dynamic. IL est ici question de travailler sur la modelisation de systèmes dynamiques que l'on trouve notamment dans l'economie et dans la nature. L'idée est ici d'associer pour atteindre ce but, les Mathematiques et l'informatique.
+Cette UE se décline sous différentes formes. Celle dans laquelle nous sommes est l'ARE Dynamic. Il est ici question de travailler sur la modélisation de systèmes dynamiques que l'on trouve notamment dans l'économie et dans la nature. L'idée est ici d'associer pour atteindre ce but, les Mathématiques et l'informatique.
 
-# 4 premieres séances
+# 4 premières séances
 
-Les quatres premières seances étaient axées sur un travail en binomes sur la simulation en python de dynamiques de population. ceci dans l'idée d'introduire la notion de systemes dynamiques, ainsi que certaines specifités de programmation en Python.
+Les quatres premières séances étaient axées sur un travail en binômes sur la simulation en python de dynamiques de population. Ceci, dans l'idée d'introduire la notion de systèmes dynamiques, ainsi que certaines spécificités de programmation en Python.
 
 Voici le fichier Jupyter:
 
 [Travail initial sur des Dynamiques de population](Docs/AREDynamic/Dynamique de Population.ipynb)
 
-# Idées initiales et choix de sujets definitif/ conformes aux critères
+# Idées initiales et choix de sujet définitif, conformes aux critères
 
-Initialement en binomes les groupes de l'ARE ont du reflechir à un sujet autour des systemes complexes sur lesquels travailler en groupe de quatre. Il a donc fallu faire un tri et choisir le sujet qui parraissait interessant et qui soit à difficulté suffisamment modulable pour que celle ci puisse etre progressive.
+Initialement en binômes les groupes de l'ARE ont dû réfléchir à un sujet autour des systèmes complexes sur lequel travailler en groupe de quatre. Il a donc fallu faire un tri et choisir le sujet qui paraissait intéressant et qui soit à difficulté suffisamment modulable pour que celle ci puisse être progressive.
 
-Nous avions donc pensé à la gestion de la circulation sur les autoroutes, à des simulations proies/predateurs, et la simulation d'un restaurant.
+Nous avions donc pensé à la gestion de la circulation sur les autoroutes, à des simulations proies/prédateurs, et la simulation d'un restaurant.
 
-Nous avons donc opté pour le restaurant, qui fut egalemnt le sujet choisit pour le groupe de 4!
+Nous avons donc opté pour le restaurant, qui fut également le sujet choisi pour le groupe de 4!
 
 
 # Formation Groupe
 
-Iniatialement nous étions deux binomes Matthieu/Sandor et Rayan/Florian.
+Initialement nous étions deux binomes Matthieu/Sandor et Rayan/Florian.
 
 
 # Membres
@@ -34,3 +34,4 @@ Matthieu de Castelbajac
 Florian Archambaud
 Sandor Genot
 Rayan Zahem
+
