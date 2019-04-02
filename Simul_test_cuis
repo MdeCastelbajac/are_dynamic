@@ -67,6 +67,14 @@ cooking = []
 inside = []
 cooked = [] # Ce qui est cuisiné
 
+def constr_list():
+    if to_be_cooked != {} or cooking == []:
+        for i in to_be_cooked:
+            if not i in inside:
+                for j in to_be_cooked[i]:
+                    cooking.append((i, j, False)) # On forme des tuples num_table / timer
+                inside.append(i)
+
 
 class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'un seul plat simultanément
 
@@ -92,15 +100,6 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
     d'un plat d'une table en particulier, ou au contraire, d'un timer court ou élevé peu importe la table. """
 
 
-    def constr_list():
-        if to_be_cooked != {}:
-            for i in to_be_cooked:
-                if not i in inside:
-                    for j in to_be_cooked[i]:
-                        cooking.append((i, j, False)) # On forme des tuples num_table / timer
-                    inside.append(i)
-
-
     """ Une fois cette liste disponible, chaque four va pouvoir piocher un timer (et se remplir) et le diminuer seconde
     après seconde dans la liste avec une update.
 
@@ -112,13 +111,11 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
         if self.case != ():
             a,b,c = self.case
             self.case = (a,b-1.0,c)
-            print(self.case)
 
 
     def cook(self):
         # On détermine le timer disponible le plus haut
         if cooking != []:
-            print("", self.num)
             time_max = 0.0
             indice = 0
 
@@ -127,46 +124,46 @@ class Furnace: # On créé x (fixe) instances de 'fours' qui ne peuvent cuir qu'
                     time_max = cooking[i][1]
                     indice = i
 
-
-            if self.filled: # Le four est déjà plein
-                if time_max > case[1]:
-                    if self.aside == (): # La réserve est vide
-                        self.aside = self.case
-                        self.case = cooking[i]
+            if time_max > 0.0 :
+                if self.filled: # Le four est déjà plein
+                    if time_max > case[1]:
+                        if self.aside == (): # La réserve est vide
+                            self.aside = self.case
+                            self.case = cooking[i]
+                            self.indice_case = indice
+                            #(_,_,piocher) = cooking[indice]
+                            #piocher = True# Le timer est pioché
+                        # Sinon on ne fait rien et on attend que les timers décroissent
+                else: # Le four est vide
+                    if self.aside != ():
+                        self.indice_case = self.indice_aside
+                        self.case = self.aside
+                        self.aside = ()
+                    else:
+                        self.case = cooking[indice]
+                        (_,a,piocher) = cooking[indice]
+                        piocher = True  # Le timer est pioché
                         self.indice_case = indice
-                        (_,_,piocher) = cooking[indice]
-                        piocher = True# Le timer est pioché
-                    # Sinon on ne fait rien et on attend que les timers décroissent
-            else: # Le four est vide
-                if self.aside != ():
-                    self.indice_case = self.indice_aside
-                    self.case = self.aside
-                    self.aside = ()
-                else:
-                    self.case = cooking[indice]
-                    (_,a,piocher) = cooking[indice]
-                    piocher = True  # Le timer est pioché
-                    self.indice_case = indice
-            if self.case[1] <= 1.0:
-                if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
-                    self.case = ()
-                    (a,b,c) = cooking[indice]
-                    cooking[indice] = (a,0.0,c)
-                    # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
-                else:
-                    (a,b,c) = cooking[indice]
-                    cooking[indice] = (a,0.0,c)
-                    Furnace.tictoc(self)
-                    #root.after(1000 * self.case[1], Furnace.tictoc(self)) #Permet de faire décroitre les dernieres decimales de facon realiste.
+                if self.case[1] <= 1.0:
+                    if self.case[1] <= 0.0 : # La cuisson du plat correspondant est terminée
+                        self.case = ()
+                        (a,b,c) = cooking[indice]
+                        cooking[indice] = (a,0.0,c)
+                        # On vide le four mais on ne change pas la valeur de pioché, le plat est en quelque sorte mis de côté
+                    else:
+                        (a,b,c) = cooking[indice]
+                        cooking[indice] = (a,0.0,c)
+                        Furnace.tictoc(self)
+                        #root.after(1000 * self.case[1], Furnace.tictoc(self)) #Permet de faire décroitre les dernieres decimales de facon realiste.
 
+                (a,b,c) = cooking[indice]
+                cooking[indice] = (a,b-1,c)
+            """    for (o,e,_) in cooking:
+                    print("", o, e)"""
             Furnace.check_ready()
-            (a,b,c) = cooking[indice]
-            cooking[indice] = (a,b-1,c)
-            for (o,e,_) in cooking:
-                print("", o, e)
 
-            #Furnace.tictoc(self)
-            root.after(int(1000/nb_cuis), Furnace.tictoc(self)) # Après 1 seconde, on décrémente le timer d'une seconde
+                #Furnace.tictoc(self)
+            root.after(int(10/nb_cuis), Furnace.tictoc(self)) # Après 1 seconde, on décrémente le timer d'une seconde
 
 
         """ Je n'ai pas trouvé le moyen de limiter la durée de la réserve pour l'instant : à voir """
@@ -259,15 +256,16 @@ class Waiter:
             self.number = filled[0] # Prise pour cible de la table pleine depuis le plus de temps
             filled.remove(self.number)
             pris.append(self.number)
+
         if param.tables[self.number] == 2: # Si la table a commandé
             if (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
                 y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
-                root.after(20, self.movement_y(y_dir))
+                root.after(5, self.movement_y(y_dir))
 
             elif (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100):
                 # The waiter must close out the distance before collecting the order
                 x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
-                root.after(20, self.movement_x(x_dir))
+                root.after(5, self.movement_x(x_dir))
                 self.waiting = False # Confirmation de non-attente
             elif not self.waiting:
                 self.waiting = True # Passage à l'attente
@@ -276,19 +274,20 @@ class Waiter:
                 if time_now - tstart['w'+str(self.num)] > 2.0000: # Prise de commande terminée
                     self.orders[self.number] = eval("%s" % "table"+str(self.number)).order # Waiter just takes the orders coming from the table that called him
                     self.waiting = False # Passage à la non-attente
+                    print("j'ai pris la commande")
                     pris.remove(self.number) # La table est transférée de la liste des remplies...
                     command.append(self.number) #... à  celles ayant passé commande
+                    eval("%s" % "table"+str(self.number)).order = []
                     self.number = 0 # Annulation du ciblage de la table
-
 
 
     def go_to_entrance(self):
         if(self.coords[1] != entrance[1]):
             y_dir = self.coords[1] - entrance[1]
-            root.after(20, self.movement_y(y_dir))
+            root.after(5, self.movement_y(y_dir))
         elif(self.coords[0] != entrance[0]):
             x_dir = self.coords[0] - entrance[0]
-            root.after(20, self.movement_x(x_dir))
+            root.after(5, self.movement_x(x_dir))
         else:
             self.waiting = True
 
@@ -297,10 +296,10 @@ class Waiter:
 
         if self.coords[1] != koords[1]:
             y_dir = self.coords[1] - koords[1]
-            root.after(20, self.movement_y(y_dir))
+            root.after(5, self.movement_y(y_dir))
         elif self.coords[0] != koords[0]: # The waiter goes back to the kitchens to give the order he collected
             x_dir = self.coords[0] - koords[0]
-            root.after(20, self.movement_x(x_dir))
+            root.after(5, self.movement_x(x_dir))
         else:
             self.waiting = True
 
@@ -328,18 +327,18 @@ class Waiter:
             self.number = self.delivery
         if (self.coords[1] != eval("%s" % "table"+str(self.number)).coords[1]):
             y_dir = self.coords[1] - eval("%s" % "table"+str(self.number)).coords[1]
-            root.after(20, self.movement_y(y_dir))
+            root.after(5, self.movement_y(y_dir))
 
         elif (self.coords[0] != eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number+1))*100): # The waiter must close out the distance before collecting the order
             x_dir = self.coords[0] - eval("%s" % "table"+str(self.number)).coords[0]+((-1)**(self.number))*100
-            root.after(20, self.movement_x(x_dir))
+            root.after(5, self.movement_x(x_dir))
         else:
             eval("%s" % "table"+str(self.number)).img = eval("%s" % "table"+str(self.number)).room.create_image(eval("%s" % "table"+str(self.number)).coords[0], eval("%s" % "table"+str(self.number)).coords[1], image = table_served)
             root.update_idletasks()
             root.update()
             param.tables[self.number] = 3 # La table est servie
             self.delivery = 0 # Le serveur ne transporte rien
-
+            self.number = 0
 
     def activity(self):
         global accueil, libr
@@ -359,7 +358,7 @@ class Waiter:
             param.waiters[self.num] = 0
             if param.waiters[self.num] == 5:
                 libr = True
-        elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 2) and self.delivery == 0 and cooked != [] and libr == True:
+        elif (param.waiters[self.num] == 0 or param.waiters[self.num] == 2) and self.delivery == 0 and cooked != [] and """libr == True""":
             # Le serveur est disponible et des commandes sont prètes à être servies
             param.waiters[self.num] = 2 # Le serveur va chercher les plats
             Waiter.pick_up(self)
@@ -375,7 +374,7 @@ class Waiter:
             # Le serveur est disponible et des tables peuvent commander
             param.waiters[self.num] = 4 # Le serveur va noter les commandes
             Waiter.collect_order(self)
-        elif (param.waiters[self.num] == 5 and self.orders != {}) or (param.waiters[self.num] == 4 and filled == [] and libr == True):
+        elif (param.waiters[self.num] == 5 and self.orders != {}) or (param.waiters[self.num] == 4 and filled == [] and """libr == True"""):
             # Le serveur a pris des commandes
             param.waiters[self.num] = 5 # Le serveur les transmet aux cuisines
             Waiter.go_to_kitchen(self)
@@ -437,7 +436,7 @@ class Table:
 
 
     def ordering(self): # Randomly choice a dishes within the MENU times clients
-        if self.number in filled:
+        if self.order == []:
             for i in range(self.fullcapacity):
                 self.order.append(random.choice(list((MENU.keys()))))
                 print("New order : ", self.order[i])
@@ -465,7 +464,7 @@ class Table:
             param.tables[self.number] = 0 # La table est vide
             self.capacity = 0
             empty.append(self.number)
-            command.remove(self.number) # La table n'a plus de commande
+            #command.remove(self.number) # La table n'a plus de commande
             self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_vide)
             root.update_idletasks()
             root.update()
@@ -495,9 +494,9 @@ waiter_left = PhotoImage(file="~/ARE_DYNAMIC/Images/waiter_left.gif")
 # OUR AGENTS
 # Our table
 # Nombres de tables, serveurs et plans de cuisine
-nb_tabl= 2
-nb_serv= 2
-nb_cuis= 4
+nb_tabl= 10
+nb_serv= 3
+nb_cuis= 8
 # Gestion du temps
 
 interval = 0.01 # Intervalle minimum de temps
@@ -522,12 +521,12 @@ root.update()
 def fonc():
     global time_now, param, table
     tstart['sys'] = time.time() # Début de l'étape
+    constr_list()
     for i in range(1, nb_tabl+1):
         exec("%s" % ("Table.main(table"+str(i)+")"))
     for i in range(1, nb_serv+1):
         exec("%s" % ("Waiter.activity(waiter"+str(i)+")"))
     for i in range(1, nb_cuis+1):
-        Furnace.constr_list()
         exec("%s" % ("Furnace.cook(furnace"+str(i)+")"))
     while tstart['sys']+interval > time_now:
         time_now = time.time() # Temps actuel
@@ -539,4 +538,5 @@ while t < temps:
 
 
 root.mainloop()
+
 
