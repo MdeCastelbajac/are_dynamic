@@ -18,7 +18,7 @@ Voici le fichier Jupyter:
 
 Initialement en binômes les groupes de l'ARE ont dû réfléchir à un sujet autour des systèmes complexes sur lequel travailler en groupe de quatre. Il a donc fallu faire un tri et choisir le sujet qui paraissait intéressant et qui soit à difficulté suffisamment modulable pour que celle ci puisse être progressive.
 
-Nous avions donc pensé à la gestion de la circulation sur les autoroutes, à des simulations proies/prédateurs, et la simulation d'un restaurant.
+Nous avions donc pensé, entre autres, à la gestion de la circulation sur les autoroutes, à des simulations proies/prédateurs, et la simulation d'un restaurant.
 
 Nous avons donc opté pour le restaurant, qui fut également le sujet choisi pour le groupe de 4!
 
@@ -30,8 +30,8 @@ Initialement nous étions deux binomes Matthieu/Sandor et Rayan/Florian.
 
 # Membres
 
-Matthieu de Castelbajac
-Florian Archambaud
-Sandor Genot
-Rayan Zahem
+-Matthieu de Castelbajac
+-Florian Archambaud
+-Sandor Genot
+-Rayan Zahem
 
