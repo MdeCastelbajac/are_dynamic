@@ -1,7 +1,8 @@
 La simulation que nous avons entrepris est de type "Agent Based Model".
 
-Selon wikipedia: 
+Selon wikipedia:
 
+> An agent-based model (ABM) is a class of computational models for simulating the actions and interactions of autonomous agents (both individual or collective entities such as organizations or groups) with a view to assessing their effects on the system as a whole
 
 
 Vous avez ici des ressources sur ce sujet ainsi que des exemples d'applications de ce modele.
@@ -11,14 +12,6 @@ Vous avez ici des ressources sur ce sujet ainsi que des exemples d'applications 
 
 Les premières simulations de ce type sont particulierement recentes. En effet celle ci étant dépendantes d'une certaine capacité de calcul.
 L'idée de l'ABM puise sa source dans bon nombre de theorie prééxistantes comme la "game theory", ou encore " les methodes de Monte Carlo". Les premières traces theoriques de l'ABM datent de 1940, et les premières simulations ont existé depuis les années 1990.
-
-
-
-
-
-
-
-
 
 
 
