@@ -1,5 +1,3 @@
-sudo pip install nose nosegae
-
 import random
 import time
 from tkinter import *
