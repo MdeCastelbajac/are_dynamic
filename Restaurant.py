@@ -6,6 +6,7 @@ import gc
 
 #Room
 root = Tk()
+# Change path accordingly
 img_bg = PhotoImage(file = "Images/rest_room_bg.gif")
 room = Canvas(width = 600, height = 1000)
 instance_bg = room.create_image(300, 400, image = img_bg)
@@ -448,7 +449,7 @@ class Table:
 #########################################################################################
 #                                     I M A G E S                                       #
 #########################################################################################
-
+# Change paths accordingly
 
 table_vide = PhotoImage(file="~/ARE_DYNAMIC/Images/table_4.gif")
 table_1_client = PhotoImage(file="~/ARE_DYNAMIC/Images/table_1_client.gif")
