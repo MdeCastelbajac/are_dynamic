@@ -1,3 +1,7 @@
+# Optimisation of the waiting time in a restaurant
+
+## Introduction
+
 As part of the ARE Dynamic course at Sorbonne University we had to choose a Dynamic system to model in the semester’s time frame. It is a mean to use Mathematical and Computer programming notions on a specific subject.
 
 After a few weeks of an introduction course on python we had to choose a specific dynamic system to work on.
@@ -17,14 +21,26 @@ It has been used in biology with the analysis of the evolution of epidemics, or 
 
 Specifically our ABM is about analyzing how the waiting time of the clients evolves in a restaurant according to different parameters. 
 
-First there is the basic configuration of the restaurant:
-  - 
+## Our Model and the parameters
+The configuration of the restaurant:
+- The number of tables of four people (which is a limitation of our model)
+- The Menu with several choices and variable cooking time
 
 
+The 
 
-Our plan according to this model , is to determine and compare the average client waiting time 
+The result we are analazing:
+
+- The average client's waiting time
+
+## The main goal:
+
+Our plan according to this model, is to determine and compare the average client waiting time. 
+
+In fact according to the configuration of a restaurant and a given 
 
 
+## How it could be usefull
 
 In fact, we can determine, the optimal workforce (Waiters/Cooks) needed for a specific restaurant configuration.
 As a conclusion, our system could be used to streamline and optimize the workforce needed for each specific restaurant configuration and average client affluence. This could save money, improve the client satisfaction, and facilitate the restaurants management
