@@ -440,7 +440,7 @@ class Table:
             param.tables[self.number] = 0 # La table est vide
             self.capacity = 0
             empty.append(self.number)
-            #command.remove(self.number) # La table n'a plus de commande
+            room.delete(self.img)
             self.img = self.room.create_image(self.coords[0], self.coords[1], image = table_vide)
             root.update_idletasks()
             root.update()
