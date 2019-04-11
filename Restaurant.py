@@ -2,7 +2,6 @@ import random
 import time
 from tkinter import *
 import copy
-import gc
 
 #Room
 root = Tk()
