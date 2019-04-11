@@ -22,12 +22,16 @@ It has been used in biology with the analysis of the evolution of epidemics, or 
 Specifically our ABM is about analyzing how the waiting time of the clients evolves in a restaurant according to different parameters. 
 
 ## Our Model and the parameters
+
 The configuration of the restaurant:
+
 - The number of tables of four people (which is a limitation of our model)
 - The Menu with several choices and variable cooking time
 
+The employees:
 
-The 
+- The waiters
+- The kitchen
 
 The result we are analazing:
 
@@ -37,7 +41,7 @@ The result we are analazing:
 
 Our plan according to this model, is to determine and compare the average client waiting time. 
 
-In fact according to the configuration of a restaurant and a given 
+In fact according to the configuration of a restaurant and a given variable 
 
 
 ## How it could be usefull
@@ -45,7 +49,7 @@ In fact according to the configuration of a restaurant and a given
 In fact, we can determine, the optimal workforce (Waiters/Cooks) needed for a specific restaurant configuration.
 As a conclusion, our system could be used to streamline and optimize the workforce needed for each specific restaurant configuration and average client affluence. This could save money, improve the client satisfaction, and facilitate the restaurants management
 
-If you want to dive deeper in our project, here are some links, they are (sadly) in french:
+## If you want to dive deeper in our project, here are some links, they are (sadly) in french:
 
 [Avancée du projet hebdomadaire](Blog.md)
 
