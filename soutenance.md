@@ -41,10 +41,11 @@ Revenons ici sur les actions et intéractions des agents à une plus grande éch
         param.tables[self.number] = 0 # Table's state for other agents
         self.degust = False #clients are eating
  """
+ 
 Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre. Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous allons justement le vérifier.
 
 
-### Calcul du TAM
+#### Calcul du TAM
 
 
 
