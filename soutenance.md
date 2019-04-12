@@ -1,5 +1,5 @@
 ## Introduction
- Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, ([voire ici](ExemplesDocu.md)) nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la programmation orientée objet s'est rapidement imposé. 
+ Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, ([voir ici](ExemplesDocu.md)) nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la programmation orientée objet s'est rapidement imposé. 
  
  
  Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme *StackOverflow* ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter.
