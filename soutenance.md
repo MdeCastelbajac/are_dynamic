@@ -1,5 +1,5 @@
 
-# Retour sur une description générale du modèle.
+## Retour sur une description générale du modèle.
   Nous décomposerons le modèle que nous avons construit selon trois aspects distincts : 
   - D'une part, les paramètres :
   
@@ -19,10 +19,10 @@
   
   Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
   
-# Description du modèle à l'échelle micro.
+## Description du modèle à l'échelle micro.
 Revenons ici sur les actions et intéractions des agents à une plus grande échelle. 
 
-Une **Table** est 
+### La classe Table : (on commentera directement le code)
 
 """
  class Table:
@@ -39,10 +39,12 @@ Une **Table** est
         self.order = [] # The clients randomly chose dishes in the MENU
         param.tables[self.number] = 0 # Table's state for other agents
         self.degust = False #clients are eating
-
-        # TAM calculation
-        self.timer = 0.0 
-        self.timer_debut_action = 0.0
-        self.timer_fin_action = 0.0
-
  """
+Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre. Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous allons justement le vérifier.
+
+
+### Calcul du TAM
+
+
+
+
