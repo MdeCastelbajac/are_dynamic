@@ -25,7 +25,7 @@ Revenons ici sur les actions et intéractions des agents à une plus grande éch
 Une **Table** est 
 
 """
-class Table:
+ class Table:
 
     #initialization
     def __init__(self, room, image, coords, number, fullcapacity, degust, timer, timer_debut_action, timer_fin_action):
@@ -37,9 +37,12 @@ class Table:
         self.fullcapacity = fullcapacity # How many clients are needed to fill the table
         self.capacity = 0 # How many clients are currently sitting there
         self.order = [] # The clients randomly chose dishes in the MENU
-        param.tables[self.number] = 0 # Etat de la table
-        self.degust = False # Si les clients mangent
-        self.timer = 0.0
+        param.tables[self.number] = 0 # Table's state for other agents
+        self.degust = False #clients are eating
+
+        # TAM calculation
+        self.timer = 0.0 
         self.timer_debut_action = 0.0
         self.timer_fin_action = 0.0
+
  """
