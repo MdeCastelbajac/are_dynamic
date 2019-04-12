@@ -46,10 +46,19 @@ The goal is to analyze how some parameters impact the average waiting time.
 We are for example simulating how the number of choices in the menu impacts the waiting time, or how the variability of the dishes cooking times has an impact on the average waiting time.
 We are also trying to grasp the way the number of waiters impact this waiting time. Is it proportional? Is there a critical number where adding even more waiters doesn’t impact the waiting time anymore? And so on!
 
-
-
 ## How it could be useful
 
 In fact if we could determine the optimal workforce (Waiters/Cooks) needed for a specific restaurant configuration (Number of tables, and estimated client affluence), then this system could be used to streamline and optimize the workforce needed. This could save money, improve the client satisfaction, and facilitate the restaurants management.
 
+## If you want to dive deeper in our project, here are some links, they are (sadly) in french:
+[Soutenance](soutenance.md)
 
+[Avancée du projet hebdomadaire](Blog.md)
+
+[Fonctionnement/MakingOff](Fonctionnement.md)
+
+[Annexes](Annexes.md)
+
+[Ressources et autres applications d'ABM](ExemplesDocu.md)
+
+[Le projet ARE et nous](Nous.connaitre.ARE.md)
