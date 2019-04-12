@@ -7,6 +7,27 @@
    <strong>L'affluence des clients</strong> qui est fixe et maximale. Dès que les conditions sont réunies - une table est     libre et un serveur est prêt à les accueillir - les clients arrivent.
   
    <strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
+    '''
+       # MENU OF DISHES
+        MENU = {"Boeuf Bourguignon" : 35.30,
+        "Spicy Burger" : 15.30,
+        "Tartar" : 13.0,
+        "Veggie Salad" : 10.30,
+        "Veggie Burger": 14.30,
+        "Ceasar Salad" : 12.30,
+        "Bruceta" : 26.30,
+        "Daily Pasta" : 13.30,
+        "Carbonara" : 14.0,
+        "Homard" : 18.00,
+        "Filet de Saint-Pierre" : 20.00,
+        "Filet de Merlu a la Plancha" : 16.00,
+        "Noix de Saint-Jacques au beurre salé" : 21.00
+        }
+
+    
+    
+    
+    '''
   
    <strong>La cuisine</strong> qui prépare les plats commandés de telle façon à ce que les plats commandés à une même table  soient prêts en même temps.
   
@@ -42,7 +63,7 @@ Revenons ici sur les actions et intéractions des agents à une plus grande éch
         self.degust = False #clients are eating
  """
  
-Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre. 
+Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre, via une fonction main. 
 Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous allons justement le vérifier.
 
 
@@ -87,7 +108,25 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
             self.room.move(self.img, 5, 0)
         self.coords = self.room.coords(self.img)
         '''
+ En effet, plusieurs fonctions font appel aux déplacement : 
+ 
+     '''
+     
+    def go_to_kitchen(self):
+        if self.coords[1] != koords[1]:
+            y_dir = self.coords[1] - koords[1]
+            root.after(10, self.movement_y(y_dir))
+        elif self.coords[0] != koords[0]: # The waiter goes back to the kitchens to give the order he collected
+            x_dir = self.coords[0] - koords[0]
+            root.after(10, self.movement_x(x_dir))
+        else:
+            self.waiting = True
+        '''
 
+Tout comme pour les tables, on a aussi une fonction main, qui, en fonction des conditions propres aux serveurs, et des appels respectifs de la cuisine et des tables, ordonne au serveur d'effectuer une certaine tâche.
+
+
+ 
 
 
 
