@@ -68,9 +68,9 @@ La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, ch
 
 Le code relatif se révélant un peu touffu, on se bornera à prendre quelques exemples.
 
-Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on explicitera : 
-'''   
-
+Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on explicitera :   
+    '''   
+   
     def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
     # the waiter takes
         if x_dir > 0 and x_dir != 0:
