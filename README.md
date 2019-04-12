@@ -55,12 +55,10 @@ As a conclusion, our system could be used to streamline and optimize the workfor
 
 [Avancée du projet hebdomadaire](Blog.md)
 
-[Avancées des Objectifs/roadmap](Taches.md)
-
 [Fonctionnement/MakingOff](Fonctionnement.md)
 
 [Annexes](Annexes.md)
 
-[Exemples d'autres "agent based simulation models" et Ressources](ExemplesDocu.md)
+[Ressources et autres applications d'ABM](ExemplesDocu.md)
 
 [Le projet ARE et nous](Nous.connaitre.ARE.md)
