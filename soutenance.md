@@ -49,9 +49,8 @@ Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, 
 #### Calcul du TAM
 
 Toujours dans la classe Table : 
-"""
-class Table:
 
+"""
         # TAM calculation
         self.timer = 0.0 
         self.timer_debut_action = 0.0
