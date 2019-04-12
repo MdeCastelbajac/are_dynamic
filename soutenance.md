@@ -23,7 +23,7 @@
 ## Description du modèle à l'échelle micro.
 Revenons ici sur les actions et intéractions des agents à une plus grande échelle. 
 
-### La classe Table : (on commentera directement le code)
+#### La classe Table : (on commentera directement le code)
 
 """
  class Table:
