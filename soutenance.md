@@ -59,5 +59,37 @@ Toujours dans la classe Table :
 
 '''
 
+A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
+
+
+### La classe serveur
+
+La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, chaque instance doit être gérée sur deux plans différents de façon plus poussée. Jusqu'ici, nous n'avons pas beaucoup parlé simulation. On présentera donc leur fonctionnement à la fois dans le modèle et dans la simulation.
+
+Le code relatif se révélant un peu touffu, on se bornera à prendre quelques exemples.
+
+Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on explicitera : 
+'''    def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
+    # the waiter takes
+        if x_dir > 0 and x_dir != 0:
+            room.delete(self.img)
+            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_left)
+            root.update_idletasks()
+            root.update()
+            self.room.move(self.img, -5, 0)
+        elif x_dir !=0:
+            room.delete(self.img)
+            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_right)
+            root.update_idletasks()
+            root.update()
+            self.room.move(self.img, 5, 0)
+        self.coords = self.room.coords(self.img)'''
+
+
+
+
+
+
+
 
 
