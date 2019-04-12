@@ -185,9 +185,11 @@ Reprenons donc la carte utilisée jusqu'ici
   
   On commence donc par calculer simplement la moyenne et la variance des temps de cuisson de cette carte, qui servira de référence pour la suite de l'expérience.
   
-  Moyenne = 17.44
   
-  Variance = 46.44
+    Moyenne = 17.44
+  
+    Variance = 46.44
+  
   
  On gardera le même nombre de table, et on fixera le nombre de serveurs à (nb_TAM_optimal).
  
