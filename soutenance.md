@@ -67,23 +67,7 @@ Revenons ici sur les actions et intéractions des agents à une plus grande éch
  
  
 Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre, via une fonction main. 
-Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous allons justement le vérifier.
-
-
-#### Calcul du TAM
-
-Toujours dans la classe Table : 
-
-
-
-        # TAM calculation
-        self.timer = 0.0 
-        self.timer_debut_action = 0.0
-        self.timer_fin_action = 0.0
-
-
-
-A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
+Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous le vérifierons plus tard.
 
 
 #### La classe serveur
@@ -131,6 +115,22 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
 
 Tout comme pour les tables, on a aussi une fonction main, qui, en fonction des conditions propres aux serveurs, et des appels respectifs de la cuisine et des tables, ordonne au serveur d'effectuer une certaine tâche.
 
+
+
+#### Calcul du TAM
+
+De nouveau dans la classe Table : 
+
+
+
+        # TAM calculation
+        self.timer = 0.0 
+        self.timer_debut_action = 0.0
+        self.timer_fin_action = 0.0
+
+
+
+A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
 
 #### Fonctionnement du programme 
 
