@@ -1,4 +1,5 @@
-
+## Introduction
+ 
 ## Retour sur une description générale du modèle.
  Nous décomposerons le modèle que nous avons construit selon trois aspects distincts : 
  
