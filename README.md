@@ -51,6 +51,8 @@ As a conclusion, our system could be used to streamline and optimize the workfor
 
 ## If you want to dive deeper in our project, here are some links, they are (sadly) in french:
 
+[Soutenance](soutenance.md)
+
 [Avancée du projet hebdomadaire](Blog.md)
 
 [Avancées des Objectifs/roadmap](Taches.md)
