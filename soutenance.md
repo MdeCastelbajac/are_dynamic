@@ -20,3 +20,26 @@
   Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
   
 # Description du modèle à l'échelle micro.
+Revenons ici sur les actions et intéractions des agents à une plus grande échelle. 
+
+Une **Table** est 
+
+"""
+class Table:
+
+    #initialization
+    def __init__(self, room, image, coords, number, fullcapacity, degust, timer, timer_debut_action, timer_fin_action):
+        self.room = room
+        self.img = self.room.create_image(coords[0], coords[1], image = table_vide)
+        self.image = image
+        self.number = number # The table's number is necessary to register orders and deliver dishes at the right place
+        self.coords = coords # The table's coords : same necessity
+        self.fullcapacity = fullcapacity # How many clients are needed to fill the table
+        self.capacity = 0 # How many clients are currently sitting there
+        self.order = [] # The clients randomly chose dishes in the MENU
+        param.tables[self.number] = 0 # Etat de la table
+        self.degust = False # Si les clients mangent
+        self.timer = 0.0
+        self.timer_debut_action = 0.0
+        self.timer_fin_action = 0.0
+ """
