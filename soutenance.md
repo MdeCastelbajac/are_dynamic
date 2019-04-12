@@ -160,7 +160,7 @@ Rappelons ici les questions que nous nous posions au début du projet :
 A titre indicatif : (insérere le premier graphe).
 
 
-Il convient tout d'abord d'isoler le nombre de serveurs. On fixe alors tous les autres. Pour toutes nos expériences on fixe le nombre de table à 8, et la carte au modèle présenté ci-dessus.
+Il convient tout d'abord d'isoler le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à 8, et la carte au modèle présenté ci-dessus.
 Ensuite, pour un nombre de serveur variant de 1 à 8, on récupère les 50 premières valeurs du TAM, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix de plats aléatoires sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
 
 
