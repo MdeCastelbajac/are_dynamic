@@ -8,6 +8,7 @@
   
    <strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
     '''
+       
        # MENU OF DISHES
         MENU = {"Boeuf Bourguignon" : 35.30,
         "Spicy Burger" : 15.30,
@@ -126,9 +127,20 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
 Tout comme pour les tables, on a aussi une fonction main, qui, en fonction des conditions propres aux serveurs, et des appels respectifs de la cuisine et des tables, ordonne au serveur d'effectuer une certaine tâche.
 
 
- 
+#### Fonctionnement du programme 
 
+L'exécution du programme passe par plusieurs étapes.
 
+Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des paramètres choisis. On utilise donc la bibliothèque TKinter : 
+    '''
+     
+    for i in range(1, nb_serv+1):
+    exec("%s = %s" % ('waiter'+str(i),'Waiter(i, room, [300,300+100*i])'))
+
+  
+    '''
+
+Ensuite, on rentre dans une boucle, qui exécute successivement les fonctions main des classes Tables et Serveurs.
 
 
 
