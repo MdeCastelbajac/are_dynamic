@@ -24,10 +24,6 @@
         "Filet de Merlu a la Plancha" : 16.00,
         "Noix de Saint-Jacques au beurre salé" : 21.00
         }
-
-    
-    
-    
     '''
   
    <strong>La cuisine</strong> qui prépare les plats commandés de telle façon à ce que les plats commandés à une même table  soient prêts en même temps.
@@ -139,3 +135,101 @@ Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des para
     '''
 
 Ensuite, on rentre dans une boucle, qui exécute successivement les fonctions main des classes Tables et Serveurs.
+
+
+## Expériences et Exploitation des résultats
+
+#### Protocole 1
+Nous commencerons par observer l'influence du nombre de serveur.
+
+A titre indicatif : (insérere le premier graphe).
+
+
+Il convient tout d'abord d'isoler le nombre de serveurs. On fixe alors tous les autres. Pour toutes nos expériences on fixe le nombre de table à 8, et la carte au modèle présenté ci-dessus.
+Ensuite, pour un nombre de serveur variant de 1 à 8, on récupère les 50 premières valeurs du TAM, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix de plats aléatoires sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
+
+
+Rappelons ici les questions que nous nous posions au début du projet : 
+   - Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un TAM optimal ? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus.
+
+#### Résultats
+On construit par la suite le graphe suivant duquel on peut déduire plusieurs affirmations intéressantes :
+
+
+#### Protocole 2 
+Nous observerons ici l'influence de la carte, de part sa taille, et de part la variance des temps de cuisson.
+Reprenons donc la carte utilisée jusqu'ici
+    '''
+       
+       # MENU OF DISHES
+        MENU = {"Boeuf Bourguignon" : 35.30,
+        "Spicy Burger" : 15.30,
+        "Tartar" : 13.0,
+        "Veggie Salad" : 10.30,
+        "Veggie Burger": 14.30,
+        "Ceasar Salad" : 12.30,
+        "Bruceta" : 26.30,
+        "Daily Pasta" : 13.30,
+        "Carbonara" : 14.0,
+        "Homard" : 18.00,
+        "Filet de Saint-Pierre" : 20.00,
+        "Filet de Merlu a la Plancha" : 16.00,
+        "Noix de Saint-Jacques au beurre salé" : 21.00
+        }
+    '''
+  S'il on veut obtenir des résultats exploitables, il nous faut utiliser seulement des cartes ayant une même moyenne de temps de cuisson.
+  
+  On commence donc par calculer simplement la moyenne et la variance des temps de cuisson de cette carte, qui servira de référence pour la suite de l'expérience.
+  
+  Moyenne = 17.44
+  Variance = 46.44
+  
+ On gardera le même nombre de table, et on fixera le nombre de serveurs à (nb_TAM_optimal).
+ 
+ Dans un premier temps, on réduit puis augmente la taille de la carte, de telle façon à ce qu'elle conserve sa moyenne, et on récupère les valeurs du TAM selon la même procédure que précédemment.
+
+Voici les deux cartes obtenues après modifications : 
+
+taille+ : 
+
+
+
+
+taille- :
+ 
+ On construit avec ces données le graphe suivant : 
+ 
+ 
+ 
+ 
+
+
+
+Dans un second temps, on s'occupe de la variance, qu'on s'emploie à augmenter, puis à diminuer.
+On procèdera encore une fois de la même façon.
+  
+variance + : 
+
+
+
+variance - :
+
+
+
+On construit avec ces données le graphe suivant : 
+ 
+
+
+
+
+## Conclusion et dernières réflexions 
+
+
+
+
+
+
+
+
+
+
