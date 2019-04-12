@@ -84,7 +84,7 @@ Toujours dans la classe Table :
 A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
 
 
-### La classe serveur
+#### La classe serveur
 
 La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, chaque instance doit être gérée sur deux plans différents de façon plus poussée. Jusqu'ici, nous n'avons pas beaucoup parlé simulation. On présentera donc leur fonctionnement à la fois dans le modèle et dans la simulation.
 
@@ -136,14 +136,6 @@ Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des para
      
     for i in range(1, nb_serv+1):
     exec("%s = %s" % ('waiter'+str(i),'Waiter(i, room, [300,300+100*i])'))
-
-  
     '''
 
 Ensuite, on rentre dans une boucle, qui exécute successivement les fonctions main des classes Tables et Serveurs.
-
-
-
-
-
-
