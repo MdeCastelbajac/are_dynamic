@@ -36,7 +36,7 @@ Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet
   
 - D'autre part, les agents : 
  
-  les <strong>tables</strong> de quatre qui une fois remplie, commande aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elle se vident après une durée fixe.
+  les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elle se vident après une durée fixe.
   
   les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorités : accueillir de nouveau cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
  
