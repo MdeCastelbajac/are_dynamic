@@ -37,7 +37,7 @@ The result we are analyzing:
 
 - The average client's waiting time which is the sum of the time spend for each action from the order of the dishes to the moment the clients can eat.
 
-## The main goal:
+## The main goal
 
 Our plan according to this model, is to determine and compare the average client waiting time, from the moment they are reaching their table to the moment they can begin to eat their meal.
 
