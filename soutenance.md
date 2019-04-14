@@ -1,9 +1,34 @@
 ## Introduction
- Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, ([voir ici](ExemplesDocu.md)) nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la programmation orientée objet s'est rapidement imposé. 
+
+Dans le cadre de L’ARE nous avions à chercher une idée de système complexe. Qui selon le CNRS est :
+> un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible
+
+La simulation choisie du restaurant est de type ABM: 
+> An agent-based model (ABM) is a class of computational models for simulating the actions and interactions of autonomous agents with a view to assessing their effects on the system as a whole
  
- 
- Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme *StackOverflow* ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter.
-Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet.
+(Origines?)
+
+L’ABM connaît actuellement beaucoup de succès du fait de ses applications multiples notamment commerciales et scientifiques.
+
+L’idée fondamentale, est l’application de règles à l’état micro à ce que l’on appelle des agents autonomes, qui interagiront entre eux, engendrant ainsi une effet de système à l'échelle macroscopique.
+
+**Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, ([voir ici](ExemplesDocu.md)) nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la programmation orientée objet s'est rapidement imposé.**
+
+Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet la simulation et l'optimisation est un sujet aux résultats palpables.
+
+Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire. En effet les choix des plats initié par les tables sont purement aléatoire.
+
+**Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme StackOverflow ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter. Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet.**
+
+Voici les problématiques que nous nous sommes posées:
+
+- Quel est l’impact du nombre de serveurs sur le TAM?
+ -Est il proportionnel, ou autre?
+ -Existe t il un nombre de serveurs optimal, ou à partir duquel leurs nombre n’a plus d’effet sur le TAM?
+
+-Quel est l’impact sur le TAM de la carte?:
+ -Si la variance des temps de cuisson varie
+ -Si le nombre de choix varie
  
 ## Retour sur une description générale du modèle.
  Nous décomposerons le modèle que nous avons construit selon trois aspects distincts : 
