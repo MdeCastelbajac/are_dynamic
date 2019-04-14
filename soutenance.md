@@ -313,12 +313,8 @@ On construit avec ces données le graphe suivant :
 
 ## Conclusion et dernières réflexions 
 
+Ce projet fut certes l'occasion de simuler un syteme dynamique, mais également l'oportunité de mettre en pratique des connaissances et en acquérir de nouvelles. Ainsi dans cette simulation il a été question d'utiliser Python en POO et de se familiariser avec la bibliotheque Tkinter. Certains talents personnels ont meme été mis au service du projet. Les dessins ont par exemple été fait entierement from scratch.
 
+Ce fut égalemnt l'occasion de se familiariser avec tout un domaine et une forme de simulation qui est de type ABM. En effet ce type de simulation est particulierement d'actualité.
 
-
-
-
-
-
-
-
+La s
