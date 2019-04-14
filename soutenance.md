@@ -313,8 +313,15 @@ On construit avec ces données le graphe suivant :
 
 ## Conclusion et dernières réflexions 
 
-Ce projet fut certes l'occasion de simuler un syteme dynamique, mais également l'oportunité de mettre en pratique des connaissances et en acquérir de nouvelles. Ainsi dans cette simulation il a été question d'utiliser Python en POO et de se familiariser avec la bibliotheque Tkinter. Certains talents personnels ont meme été mis au service du projet. Les dessins ont par exemple été fait entierement from scratch.
+Ce projet fut certes l'occasion de simuler un système dynamique, mais également l'opportunité de mettre en pratique des connaissances et en acquérir de nouvelles. Ainsi dans cette simulation il a été question d'utiliser Python en POO et de se familiariser avec la bibliothèque graphique Tkinter. Il a également été question de se familiariser avec Github pages. Certains talents personnels ont même été mis au service du projet. Les dessins ont par exemple été fait entièrement from scratch.
 
-Ce fut égalemnt l'occasion de se familiariser avec tout un domaine et une forme de simulation qui est de type ABM. En effet ce type de simulation est particulierement d'actualité.
+Ce fut également l'occasion de faire connaissance avec tout un domaine et une forme de simulation qui est de type ABM. En effet ce type de simulation est particulièrement d'actualité. Il existe même des solutions visant à faciliter des simulations de ce type, tels qu’Anylogic, permettant de faire divers types de simulation sans réinventer la roue à chaque fois! 
 
-La s
+Grâce à cette simulation nous avons pu établir certaines conclusions et répondre à nos problématiques, comme l’estimation des variation en fonction du nombre de serveurs, ou des variations du TAM en fonction des différentes cartes.
+
+Bien que répondant déjà à certains questions critiques, le modèle pourrait être étendu notamment en ajoutant des commandes de tables non remplies, ou en changeant la configuration du restaurant.
+Ensuite actuellement le programme est parfois tributaire de la puissance de calcul de la machine sur laquelle se déroule la simulation, ce qui pourrait fausser le TAM récolté avec plus de variables.
+
+Bien que le prétexte initial de ce projet fut évidemment de travailler sur une simulation de système dynamique et l’utilisation de nouvelles connaissances, l’idée en tant que telle d'optimiser un restaurant en fonction de certains critères donnés et de variables pourrait présenter une finalité intéressante comme l’optimisation d’un restaurant ou estimer les besoins en termes de personnels lors d’une création d’enseigne.
+
+Pour résumer, ce projet fut l’occasion de se confronter à de nouveaux problèmes, d'acquérir de nouvelles connaissances, d’en appliquer certaines déjà assimilées, de créer un projet en groupe, de de découvrir un vaste domaine qui ne nous était pas familier.
