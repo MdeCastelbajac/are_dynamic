@@ -23,12 +23,12 @@ Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multi
 Voici les problématiques que nous nous sommes posées:
 
 - Quel est l’impact du nombre de serveurs sur le TAM?
- -Est il proportionnel, ou autre?
- -Existe t il un nombre de serveurs optimal, ou à partir duquel leurs nombre n’a plus d’effet sur le TAM?
+ - Est il proportionnel, ou autre?
+ - Existe t il un nombre de serveurs optimal, ou à partir duquel leurs nombre n’a plus d’effet sur le TAM?
 
--Quel est l’impact sur le TAM de la carte?:
- -Si la variance des temps de cuisson varie
- -Si le nombre de choix varie
+- Quel est l’impact sur le TAM de la carte?:
+ - Si la variance des temps de cuisson varie
+ - Si le nombre de choix varie
  
 ## Retour sur une description générale du modèle.
  Nous décomposerons le modèle que nous avons construit selon trois aspects distincts : 
