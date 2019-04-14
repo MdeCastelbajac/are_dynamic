@@ -208,14 +208,49 @@ Voici les deux cartes obtenues après modifications :
 
 taille+ : 
 
-
-
+      
+      # MENU OF DISHES
+        MENU = {"Boeuf Bourguignon" : 35.30,
+        "Spicy Burger" : 15.30,
+        "Tartar" : 13.0,
+        "Veggie Salad" : 10.30,
+        "Veggie Burger": 14.30,
+        "Ceasar Salad" : 12.30,
+        "Bruceta" : 26.30,
+        "Daily Pasta" : 13.30,
+        "Carbonara" : 14.0,
+        "Homard" : 18.00,
+        "Filet de Saint-Pierre" : 20.00,
+        "Filet de Merlu a la Plancha" : 16.00,
+        "Noix de Saint-Jacques au beurre salé" : 21.00,
+        "Kouign Amann" : 17.0,
+        "Poêlée de Champignons et légumes du jardin" : 18.30,
+        "Salade de Tofu" : 15.0,
+        "Ratatouille" : 20.30
+        }
+        
+        Moyenne = 17.48
 
 taille- :
+
+
+       # MENU OF DISHES
+        MENU = {"Boeuf Bourguignon" : 35.30,
+        "Spicy Burger" : 15.30,
+        "Tartar" : 13.0,
+        "Veggie Salad" : 10.30,
+        "Veggie Burger": 14.30,
+        "Ceasar Salad" : 12.30,
+        "Bruceta" : 26.30,
+        "Daily Pasta" : 13.30,
+        "Carbonara" : 16.0
+        }
+
+        Moyenne = 17.44
  
  On construit avec ces données le graphe suivant : 
  
- 
+       
  
  
 
@@ -225,11 +260,49 @@ Dans un second temps, on s'occupe de la variance, qu'on s'emploie à augmenter, 
 On procèdera encore une fois de la même façon.
   
 variance + : 
+        
+        # MENU OF DISHES
+        MENU = {"Boeuf Bourguignon" : 42.30,
+        "Spicy Burger" : 25.30,
+        "Tartar" : 8.0,
+        "Veggie Salad" : 3.30,
+        "Veggie Burger": 6.30,
+        "Ceasar Salad" : 7.30,
+        "Bruceta" : 31.30,
+        "Daily Pasta" : 17.30,
+        "Carbonara" : 10.0,
+        "Homard" : 21.00,
+        "Filet de Saint-Pierre" : 20.00,
+        "Filet de Merlu a la Plancha" : 11.00,
+        "Noix de Saint-Jacques au beurre salé" : 26.00
+        }
 
+        Moyenne = 17.44 (=)
+  
+        Variance = 131.44
 
 
 variance - :
-
+       
+       MENU = {"Boeuf Bourguignon" : 20.30,
+        "Spicy Burger" : 17.30,
+        "Tartar" : 20.0,
+        "Veggie Salad" : 15.30,
+        "Veggie Burger": 16.30,
+        "Ceasar Salad" : 14.30,
+        "Bruceta" : 19.30,
+        "Daily Pasta" : 18.30,
+        "Carbonara" : 15.0,
+        "Homard" : 21.00,
+        "Filet de Saint-Pierre" : 17.00,
+        "Filet de Merlu a la Plancha" : 16.00,
+        "Noix de Saint-Jacques au beurre salé" : 19.00
+        }
+        
+        
+        Moyenne = 17.44 (=)
+  
+        Variance = 4.44
 
 
 On construit avec ces données le graphe suivant : 
