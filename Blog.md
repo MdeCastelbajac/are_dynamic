@@ -1,7 +1,7 @@
 ### Première semaine :   
-Lors de la première semaine de l’ARE, la séance s’est portée sur le choix d’un sujet pour le projet. Nous avons choisit entre trois principaux sujets qui sont :
+Lors de la première semaine de l’ARE, la séance s’est portée sur le choix d’un sujet pour le projet. Nous avons choisi entre trois principaux sujets qui sont :
 - La survie d’une espèce dans un système proie-prédateur.
-- Modélisation d’une Autoroute
+- Modélisation d’une autoroute
 - Analyse du TAM dans un restaurant.
 
 Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet sa simulation et son optimisation renvoie des résultats palpables. Enfin il présente l'intérêt d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire.
@@ -10,7 +10,7 @@ Le restaurant nous a semblé être le choix le plus original, et la difficulté 
 La deuxième semaine fut portée sur la création de bouts de codes afin de poser les bases pour la réalisation de notre projet.  Nous avons aussi commencé à nous familiariser avec l’environnement github
 
 ### Troisième semaine :
-La troisième semaine est l'occasion  de faire le choix d’une programmation orienté Objet en python étant donné le choix de simulation de type ABM. Des dessins initiaux ont été réalisés pour les tables et les serveurs, la bibliothèque Tkinter fut également choisie pour l'interface graphique.
+La troisième semaine est l'occasion de faire le choix d’une programmation orienté Objet en python étant donné le choix de simulation de type ABM. Des dessins initiaux ont été réalisés pour les tables et les serveurs, la bibliothèque Tkinter fut également choisie pour l'interface graphique.
 Une présentation a aussi eu lieu pour introduire notre sujet
 
 <p align="center">
