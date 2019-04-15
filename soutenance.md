@@ -133,14 +133,19 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
         self.coords = self.room.coords(self.img)
         
         
-   <p align="center">
+  <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_right.gif?raw=true" 
 
 </p>
+
+
    <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_left.gif?raw=true" 
 
 </p>
+
+
+
  En effet, plusieurs fonctions font appel aux déplacements : 
  
     
