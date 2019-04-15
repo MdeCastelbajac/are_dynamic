@@ -80,110 +80,81 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
   
   Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
   
-## Description du modèle à l'échelle micro.
-Rappelons que nous utilisons la bibliothèque TKinter pour la gestion graphique de la simulation.
-Revenons ici sur les actions et intéractions des agents à une plus grande échelle. 
+## Echelle micro : quelques spécificités 
 
-#### La classe Table : 
+##### Exemple d'OOP
+    
+    class Waiter:
 
+    #Initialization
+    def __init__(self, num, room, coords):
+        self.num = num # Numéro du serveur
+        self.room = room # Placement dans la salle
+        self.img = self.room.create_image(coords[0], coords[1], image = waiter_down) # Création de l'image
+        self.coords = coords # Waiter's real-time coords
+        self.orders = {} # Waiter's list of orders
+        self.delivery = 0 # waiter's list of delivery
+        self.waiting = False # the waiter's waiting
+        self.number = 0 # Target table's number
+        param.waiters[self.num] = 0 #Waiter's state
 
-    class Table:
-
-    #initialization
-    def __init__(self, room, image, coords, number, fullcapacity, degust, timer, timer_debut_action, timer_fin_action):
-        self.room = room
-        self.img = self.room.create_image(coords[0], coords[1], image = table_vide)
-        self.image = image
-        self.number = number # The table's number is necessary to register orders and deliver dishes at the right place
-        self.coords = coords # The table's coords : same necessity
-        self.fullcapacity = fullcapacity # How many clients are needed to fill the table
-        self.capacity = 0 # How many clients are currently sitting there
-        self.order = [] # The clients randomly chose dishes in the MENU
-        param.tables[self.number] = 0 # Table's state for other agents
-        self.degust = False #clients are eating
+ Pourquoi c'est utile : 
+ - Chaque serveur est une **instance** de la classe. Les fonctions associée s'appliquent donc automatiquement à tous les serveurs (sous certaines conditions)
+ - On a donc pas besoin de tous les "surveiller". 
  
  
-Il faut bien comprendre que chaque table suit une liste d'actions prédéfinie et toujours dans le même ordre, via une fonction main. 
-Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, autrement que par l'illustration, la notion de client. Toutes les actions qu'on imputerait à ces derniers sont en fait effectuées par les tables - *comme le choix des plats* -. Cela nous permet de réunir plus d'information autour d'une même instance d'objet. D'autre part, elles seules sont à même de mesurer le temps d'attente comme nous le vérifierons plus tard.
-
-
-#### La classe serveur
-
-La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, chaque instance doit être gérée sur deux plans différents de façon plus poussée. Jusqu'ici, nous n'avons pas beaucoup parlé de simulation. On présentera donc leur fonctionnement à la fois dans le modèle et dans la simulation.
-
-Le code relatif se révélant un peu touffu, on se bornera à prendre quelques exemples.
-
-Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on explicitera :   
-    
-   
-    def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
-    # the waiter takes
-        if x_dir > 0 and x_dir != 0:
-            room.delete(self.img)
-            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_left)
-            root.update_idletasks()
-            root.update()
-            self.room.move(self.img, -5, 0)
-        elif x_dir !=0:
-            room.delete(self.img)
-            self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_right)
-            root.update_idletasks()
-            root.update()
-            self.room.move(self.img, 5, 0)
-        self.coords = self.room.coords(self.img)
+ #### Le déplacement
+ 
+       def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
+       # the waiter takes
+           if x_dir > 0 and x_dir != 0:
+               room.delete(self.img)
+               self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_left)
+               self.room.move(self.img, -5, 0)
+           elif x_dir !=0:
+              room.delete(self.img)
+              self.img = self.room.create_image(self.coords[0], self.coords[1], image = waiter_right)
+              self.room.move(self.img, 5, 0)
+           self.coords = self.room.coords(self.img)
+         
+ - La fonction prend une direction ( + ou - ) en paramètre.
+ - On change de sprite a chaque changement de direction.
+ 
+       def go_to_kitchen(self):
         
-        
-<p align="center">
-   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_right.gif?raw=true"/>  
-</p>
+           if self.coords[1] != koords[1]:
+               y_dir = self.coords[1] - koords[1]
+               root.after(10, self.movement_y(y_dir))
+           elif self.coords[0] != koords[0]: 
+               x_dir = self.coords[0] - koords[0]
+               root.after(10, self.movement_x(x_dir))
+ 
+ 
+ 
+ ##### Calcul du TAM
+ 
+ Dans la classe Table :
+ 
+      self.timer = 0.0
+      self.timer_debut_action = 0.0
+      self.timer_fin_action = 0.0
+
+- On récupère le temps écoulé par la différence des deux derniers timers - lancés resp. en début et en fin d'action -.
+- On calcule simplement la moyenne des temps écoulés pour toutes les tables
 
 
-<p align="center">
-   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_left.gif?raw=true"/>  
-</p>
+#### La cuisson
 
- En effet, plusieurs fonctions font appel aux déplacements : 
+- Les plats d'une même commande doivent tous être prêt en même temps.
+- Si tous les plats d'une même commande sont presque prêt, la cuisine finit leur cuisson en priorité.
+- Sinon, elle prend les plats les plus longs à cuire. Elle retire a chaque tour 1.0 seconde.
+- Ces "choix" ont une influence sur le TAM. A chaque tour de fonction, toutes les tables qui attendent voient leur temps d'attente augmentés d'1.0 seconde.
 
-    def go_to_kitchen(self):
-        if self.coords[1] != koords[1]:
-            y_dir = self.coords[1] - koords[1]
-            root.after(10, self.movement_y(y_dir))
-        elif self.coords[0] != koords[0]: # The waiter goes back to the kitchens to give the order he collected
-            x_dir = self.coords[0] - koords[0]
-            root.after(10, self.movement_x(x_dir))
-        else:
-            self.waiting = True
-        
-Tout comme pour les tables, on a aussi une fonction main, qui, en fonction des conditions propres aux serveurs, et des appels respectifs de la cuisine et des tables, ordonne au serveur d'effectuer une certaine tâche.
+##### Comment ça marche ?
 
-#### Calcul du TAM
-
-De nouveau dans la classe Table : 
-
-
-
-        # TAM calculation
-        self.timer = 0.0 
-        self.timer_debut_action = 0.0
-        self.timer_fin_action = 0.0
-
-
-
-A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. De plus, a chaque "tour" de cuisson, on incrémente cette valeur à hauteur du temps de cuisson écoulé *des plats de cette table*. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
-
-#### Fonctionnement du programme 
-
-L'exécution du programme passe par plusieurs étapes.
-
-Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des paramètres choisis : 
-    
-     
-    for i in range(1, nb_serv+1):
-    exec("%s = %s" % ('waiter'+str(i),'Waiter(i, room, [300,300+100*i])'))
-    
-
-Ensuite, on rentre dans une boucle, qui exécute successivement les fonctions main des classes Tables et Serveurs.
-
+ - Le programme fait tourner en boucle des fonctions **main** pour chaque classe.
+ - Les serveurs effectuent les actions les plus importantes en priorité.
+ - Les tables effectuent leurs actions toujours dans le même ordre.
 
 ## Expériences et Exploitation des résultats
 
@@ -199,7 +170,6 @@ Rappelons ici les questions que nous nous posions au début du projet :
 Il convient tout d'abord d'isoler le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
 
 Ensuite, pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix aléatoires de plats sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
-
 
 Enfin, on construit un **histogramme des TAM en fonction du nombre de serveurs**.
 
