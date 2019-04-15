@@ -174,6 +174,7 @@ Nous commencerons par observer **l'influence du nombre de serveur**.
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Nbre%20de%20serveurs/Temps%20d'attente.png"/>  
 </p>
 
+
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Nbre%20de%20serveurs/TAM%20en%20fonction%20du%20nombre%20de%20serveurs.png"/>  
 </p>
