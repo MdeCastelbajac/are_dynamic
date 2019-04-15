@@ -7,9 +7,9 @@ As part of the ARE Dynamic course at Sorbonne University we had to choose a Dyna
 After a few weeks of an introduction course on Python we had to choose a specific dynamic system to work on.
 
 We had several ideas of simulations, like predator/prey systems, or road simulations, ...
-We, as a group of four students, finally chose the simulation of a restaurant which is a type of model called ABM, or Agent Based Model.
+As a group of four students, we finally chose the simulation of a restaurant which is a type of model called Agent Based Model, or ABM.
 ABM is a pretty new concept initiated in 1971, made possible by new mathematical theories and new computer capabilities.
-The idea behind an agent based model, is to set rules at an individual level on each entity called autonomous agents, and then to analyze how their interactions result in system wide changes.
+The idea behind an ABM, is to set rules at an individual level on each entity called autonomous agents, and then to analyze how their interactions result in system wide changes.
 
 An ABM is defined on wikipedia as 
 
@@ -27,15 +27,12 @@ The configuration of the restaurant:
 
 - The number of tables of four people (which is a limitation of our model). Each table is filled by the clients affluence and then each tables books a dish randomly.
 - The Menu with several choices and a variable cooking time for each dish
-
-The employees:
-
-- The waiters who are among other tasks taking the orders, bringing them to the kitchen, and so on, ...
+- The waiters who are among other tasks taking the orders, bringing them to the kitchen, and so on.
 - The kitchen is dealing with the orders, and respecting some specific rules, like cooking each tables orders so that each table’s clients can begin to eat simultaneously. 
 
 The result we are analyzing:
 
-- The average client's waiting time which is the sum of the time spend for each action from the order of the dishes to the moment the clients can eat.
+- The average client's waiting time which is the sum of the time spend for each action from the order of the dishes to the moment the clients begin to eat.
 
 ## The main goal
 
