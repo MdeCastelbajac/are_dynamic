@@ -63,7 +63,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
   les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elles se vident après une durée fixe.
   
-  (https://github.com/MdeCastelbajac/are_dynamic/blob/test/table__served.gif)
+  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif)
   
   les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
  
