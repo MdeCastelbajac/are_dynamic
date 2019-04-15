@@ -1,39 +1,39 @@
 ## Introduction
 
-Dans le cadre de L’ARE nous avions à chercher une idée de système complexe. Qui selon le CNRS est :
+Dans le cadre de L’ARE nous devions modéliser un système complexe. Qui selon le CNRS est :
 > un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible
 
-La simulation choisie du restaurant est de type ABM: 
+La simulation choisie du restaurant est de type ABM ([voir ici](ExemplesDocu.md)): 
 > An agent-based model (ABM) is a class of computational models for simulating the actions and interactions of autonomous agents with a view to assessing their effects on the system as a whole
  
-(Origines?)
-
 L’ABM connaît actuellement beaucoup de succès du fait de ses applications multiples notamment commerciales et scientifiques.
 
-L’idée fondamentale, est l’application de règles à l’état micro à ce que l’on appelle des agents autonomes, qui interagiront entre eux, engendrant ainsi une effet de système à l'échelle macroscopique.
 
-**Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, ([voir ici](ExemplesDocu.md)) nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la programmation orientée objet s'est rapidement imposé.**
+L’idée fondamentale, est l’application de règles à l’**état microscopique** à ce que l’on appelle des **agents autonomes**, qui interagiront entre eux, engendrant ainsi une effet de système à **l'échelle macroscopique**.
+
+
+Le but de ce projet est de modéliser et de simuler l'activité d'un (petit) restaurant avec Python. Si notre travail peut être relié à des ABM préexistants, nous avons souhaité rester le plus autonome possible en construisant de A à Z le modèle, la simulation (oui, même les dessins) et le présent site. Le choix de la **programmation orientée objet** s'est rapidement imposé.
 
 Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet la simulation et l'optimisation est un sujet aux résultats palpables.
 
-Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire. En effet les choix des plats initiés par les tables sont purement aléatoire.
+Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire. En effet les choix des plats initié par les tables sont purement aléatoires.
 
-**Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme StackOverflow ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter. Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet.**
+Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme StackOverflow ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter. Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet.
 
-Voici les problématiques que nous nous sommes posées:
+**Voici les problématiques que nous nous sommes posées:**
 
-- Quel est l’impact du nombre de serveurs sur le TAM?
-  - Est il proportionnel, ou autre?
-  - Existe t il un nombre de serveurs optimal, ou à partir duquel leurs nombre n’a plus d’effet sur le TAM?
+**- Quel est l’impact du nombre de serveurs sur le TAM?
+  - Est il proportionnel, ou autre?**
+**- Existe t il un nombre de serveurs optimal, ou à partir duquel celui-ci n’a plus d’effet significatif sur le TAM?**
 
-- Quel est l’impact sur le TAM de la carte?:
-  - Si la variance des temps de cuisson varie
-  - Si le nombre de choix varie
+**- Quel est l’impact de la carte sur le TAM?:
+  - Selon la variance des temps de cuisson.**
+**- Selon le nombre de choix.**
  
 ## Retour sur une description générale du modèle.
  Nous décomposerons le modèle que nous avons construit selon trois aspects distincts : 
  
- - D'une part, les paramètres :
+ - D'une part, les **paramètres** :
   
    <strong>L'affluence des clients</strong> qui est fixe et maximale. Dès que les conditions sont réunies - une table est     libre et un serveur est prêt à les accueillir - les clients arrivent.
   
@@ -59,20 +59,21 @@ Voici les problématiques que nous nous sommes posées:
   
    <strong>La cuisine</strong> qui prépare les plats commandés de telle façon à ce que les plats commandés à une même table  soient prêts en même temps.
   
-- D'autre part, les agents : 
+- D'autre part, les **agents **: 
  
-  les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elle se vident après une durée fixe.
+  les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elles se vident après une durée fixe.
   
-  les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorités : accueillir de nouveau cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
+  les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
  
-- Enfin, la variable calculée : 
+- Enfin, la **variable calculée** : 
   
-  Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
+  Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
   
 ## Description du modèle à l'échelle micro.
+Rappelons que nous utilisons la bibliothèque TKinter pour la gestion graphique de la simulation.
 Revenons ici sur les actions et intéractions des agents à une plus grande échelle. 
 
-#### La classe Table : (on commentera directement le code)
+#### La classe Table : 
 
 
     class Table:
@@ -97,7 +98,7 @@ Quel intérêt alors ? Il est double. D'une part, le programme ne comprend pas, 
 
 #### La classe serveur
 
-La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, chaque instance doit être gérée sur deux plans différents de façon plus poussée. Jusqu'ici, nous n'avons pas beaucoup parlé simulation. On présentera donc leur fonctionnement à la fois dans le modèle et dans la simulation.
+La classe Serveur est un peu plus compliquée à mettre en place. Pour cause, chaque instance doit être gérée sur deux plans différents de façon plus poussée. Jusqu'ici, nous n'avons pas beaucoup parlé de simulation. On présentera donc leur fonctionnement à la fois dans le modèle et dans la simulation.
 
 Le code relatif se révélant un peu touffu, on se bornera à prendre quelques exemples.
 
@@ -155,13 +156,13 @@ De nouveau dans la classe Table :
 
 
 
-A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
+A chaque début d'attente, on lance un timer. A chaque fin d'attente on lance un nouveau timer. Il ne reste plus qu'à prendre la différence des deux et on obtient un temps d'attente pour une table. De plus, a chaque "tour" de cuisson, on incrémente cette valeur à hauteur du temps de cuisson écoulé *des plats de cette table*. Le résultat qui nous intéresse est simplement la moyenne de toutes ces valeurs récupérées, le TAM.
 
 #### Fonctionnement du programme 
 
 L'exécution du programme passe par plusieurs étapes.
 
-Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des paramètres choisis. On utilise donc la bibliothèque TKinter : 
+Tout d'abord, on doit initialiser graphiquement la fenêtre en fonction des paramètres choisis : 
     
      
     for i in range(1, nb_serv+1):
@@ -174,27 +175,33 @@ Ensuite, on rentre dans une boucle, qui exécute successivement les fonctions ma
 ## Expériences et Exploitation des résultats
 
 #### Protocole 1
-Nous commencerons par observer l'influence du nombre de serveur.
+Nous commencerons par observer **l'influence du nombre de serveur**.
 
 
 
 Rappelons ici les questions que nous nous posions au début du projet : 
-   - Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un TAM optimal ? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus?
+   - Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un **TAM optimal**? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus?
 
 
-A titre indicatif : (insérere le premier graphe).
+Il convient tout d'abord d'isoler le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
+
+Ensuite, pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix aléatoires de plats sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
 
 
-Il convient tout d'abord d'isoler le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à 8, et la carte au modèle présenté ci-dessus.
-Ensuite, pour un nombre de serveur variant de 1 à 8, on récupère les 50 premières valeurs du TAM, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix de plats aléatoires sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
+Enfin, on construit un **histogramme des TAM en fonction du nombre de serveurs**.
 
 
 #### Résultats
 On construit par la suite le graphe suivant duquel on peut déduire plusieurs affirmations intéressantes :
 
 
+
+
+
+
+
 #### Protocole 2 
-Nous observerons ici l'influence de la carte, de part sa taille, et de part la variance des temps de cuisson.
+Nous observerons ici l'influence de la carte, de part sa **taille**, et de part **la variance des temps de cuisson**.
 Reprenons donc la carte utilisée jusqu'ici
     
        
@@ -215,7 +222,7 @@ Reprenons donc la carte utilisée jusqu'ici
         }
     
     
-  S'il on veut obtenir des résultats exploitables, il nous faut utiliser seulement des cartes ayant une même moyenne de temps de cuisson.
+  Si l'on veut obtenir des résultats exploitables, il nous faut utiliser seulement des cartes ayant une **même moyenne de temps de cuisson.**
   
   On commence donc par calculer simplement la moyenne et la variance des temps de cuisson de cette carte, qui servira de référence pour la suite de l'expérience.
   
@@ -225,13 +232,13 @@ Reprenons donc la carte utilisée jusqu'ici
     Variance = 46.44
   
   
- On gardera le même nombre de table, et on fixera le nombre de serveurs à (nb_TAM_optimal).
+ On gardera le même nombre de tables, et on fixera le nombre de serveurs à .
  
  Dans un premier temps, on réduit puis augmente la taille de la carte, de telle façon à ce qu'elle conserve sa moyenne, et on récupère les valeurs du TAM selon la même procédure que précédemment.
 
 Voici les deux cartes obtenues après modifications : 
 
-taille+ : 
+**Taille + :** 
 
       
       # MENU OF DISHES
@@ -256,7 +263,7 @@ taille+ :
         
         Moyenne = 17.48
 
-taille- :
+**Taille - :**
 
 
        # MENU OF DISHES
@@ -284,7 +291,7 @@ taille- :
 Dans un second temps, on s'occupe de la variance, qu'on s'emploie à augmenter, puis à diminuer.
 On procèdera encore une fois de la même façon.
   
-variance + : 
+**Variance + :**
         
         # MENU OF DISHES
         MENU = {"Boeuf Bourguignon" : 42.30,
@@ -307,7 +314,7 @@ variance + :
         Variance = 131.44
 
 
-variance - :
+**Variance - :**
        
        MENU = {"Boeuf Bourguignon" : 20.30,
         "Spicy Burger" : 17.30,
@@ -338,15 +345,14 @@ On construit avec ces données le graphe suivant :
 
 ## Conclusion et dernières réflexions 
 
-Ce projet fut certes l'occasion de simuler un système dynamique, mais également l'opportunité de mettre en pratique des connaissances et en acquérir de nouvelles. Ainsi dans cette simulation il a été question d'utiliser Python en POO et de se familiariser avec la bibliothèque graphique Tkinter. Il a également été question de se familiariser avec Github pages. Certains talents personnels ont même été mis au service du projet. Les dessins ont par exemple été fait entièrement from scratch.
+Ce projet fut certes l'occasion de simuler un système dynamique, mais également l'opportunité de mettre en pratique des connaissances et d'en acquérir de nouvelles. Ainsi dans cette simulation il a été question d'utiliser Python en POO et de se familiariser avec la bibliothèque graphique Tkinter. Il a également été question de se familiariser avec Github pages. Certains talents personnels ont même été mis au service du projet. Les dessins ont par exemple été fait entièrement from scratch.
 
-Ce fut également l'occasion de faire connaissance avec tout un domaine et une forme de simulation qui est de type ABM. En effet ce type de simulation est particulièrement d'actualité. Il existe même des solutions visant à faciliter des simulations de ce type, tels qu’Anylogic, permettant de faire divers types de simulation sans réinventer la roue à chaque fois! 
+Ce fut également l'occasion de faire connaissance avec tout un domaine et une forme de simulation qui est de type ABM. Il existe même des solutions visant à faciliter des simulations de ce type, tels qu’**Anylogic**, permettant de faire divers types de simulation sans réinventer la roue à chaque fois! 
 
-Grâce à cette simulation nous avons pu établir certaines conclusions et répondre à nos problématiques, comme l’estimation des variation en fonction du nombre de serveurs, ou des variations du TAM en fonction des différentes cartes.
+Grâce à cette simulation nous avons pu établir certaines conclusions et répondre à certaines de nos problématiques.
+**Bien que répondant déjà à certaines questions critiques, le modèle pourrait être étendu notamment en ajoutant des commandes de tables non remplies, ou en accentuant l'aléatoire via une affluence variable.**
 
-Bien que répondant déjà à certains questions critiques, le modèle pourrait être étendu notamment en ajoutant des commandes de tables non remplies, ou en changeant la configuration du restaurant.
-Ensuite actuellement le programme est parfois tributaire de la puissance de calcul de la machine sur laquelle se déroule la simulation, ce qui pourrait fausser le TAM récolté avec plus de variables.
 
-Bien que le prétexte initial de ce projet fut évidemment de travailler sur une simulation de système dynamique et l’utilisation de nouvelles connaissances, l’idée en tant que telle d'optimiser un restaurant en fonction de certains critères donnés et de variables pourrait présenter une finalité intéressante comme l’optimisation d’un restaurant ou estimer les besoins en termes de personnels lors d’une création d’enseigne.
+Ensuite actuellement la valeur des temps d'attente est parfois tributaire de la puissance de calcul de la machine sur laquelle se déroule la simulation. En effet, à saturation, l'estimation peut être faussée.
 
-Pour résumer, ce projet fut l’occasion de se confronter à de nouveaux problèmes, d'acquérir de nouvelles connaissances, d’en appliquer certaines déjà assimilées, de créer un projet en groupe, de de découvrir un vaste domaine qui ne nous était pas familier.
+**Bien que le prétexte initial de ce projet ait été évidemment de travailler sur une simulation de système dynamique et l’utilisation de nouvelles connaissances, l’idée en tant que telle d'optimiser un restaurant en fonction de certains critères donnés et de variables pourrait présenter une finalité intéressante comme l’optimisation d’un restaurant ou l'estimation des besoins en terme de personnel lors d’une création d’enseigne.**
