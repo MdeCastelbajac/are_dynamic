@@ -348,3 +348,10 @@ Grâce à cette simulation nous avons pu établir certaines conclusions et répo
 Ensuite actuellement la valeur des temps d'attente est parfois tributaire de la puissance de calcul de la machine sur laquelle se déroule la simulation. En effet, à saturation, l'estimation peut être faussée.
 
 **Bien que le prétexte initial de ce projet ait été évidemment de travailler sur une simulation de système dynamique et l’utilisation de nouvelles connaissances, l’idée en tant que telle d'optimiser un restaurant en fonction de certains critères donnés et de variables pourrait présenter une finalité intéressante comme l’optimisation d’un restaurant ou l'estimation des besoins en terme de personnel lors d’une création d’enseigne.**
+
+
+lien test:
+
+<p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/TAM.svg"/> 
+</p> 
