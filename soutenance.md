@@ -270,7 +270,7 @@ Voici les deux cartes obtenues après modifications :
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Taille/Evolution%20du%20TAM.png?raw=true"/> 
 </p> 
 
-
+*L'impact du changement de la taille de la carte est faible*
 
 Dans un second temps, on s'occupe de la variance, qu'on s'emploie à augmenter, puis à diminuer.
 On procèdera encore une fois de la même façon.
@@ -331,6 +331,8 @@ On construit avec ces données le graphe suivant :
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Evolution%20du%20TAM.png?raw=true"/> 
 </p>
+
+*Plus de variance de temps de cuisson dans la carte, signifie plus de variabilité de temps d'attente et une augmentation du TAM*
 
 #### Resultats
 
