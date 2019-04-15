@@ -1,9 +1,3 @@
-<p align="center">
-   <img src="https://github.com/TortueDivine/are_dynamic/blob/master/Pr%C3%A9sentation/Restaurant_test_1.jpg?raw=true" alt="Illustration de l'environnement de simulation"/>
-
-</p>
-
-
 
 ## Introduction
 
@@ -69,12 +63,18 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
 - D'autre part, les **agents**: 
  
   les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elles se vident après une durée fixe.
-  
-  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif)
+  <p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif?raw=true" 
+
+</p>
   
   les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
   
-  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_down.gif)
+   <p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_down.gif?raw=true" 
+
+</p>
+   
  
 - Enfin, la **variable calculée** : 
   
@@ -131,10 +131,16 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
             root.update()
             self.room.move(self.img, 5, 0)
         self.coords = self.room.coords(self.img)
-   
-  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_left.gif)
-  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_right.gif)
-   
+        
+        
+   <p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_right.gif?raw=true" 
+
+</p>
+   <p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_left.gif?raw=true" 
+
+</p>
  En effet, plusieurs fonctions font appel aux déplacements : 
  
     
