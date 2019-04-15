@@ -30,6 +30,11 @@ The configuration of the restaurant:
 - The waiters who are among other tasks taking the orders, bringing them to the kitchen, and so on.
 - The kitchen is dealing with the orders, and respecting some specific rules, like cooking each tables orders so that each table’s clients can begin to eat simultaneously. 
 
+<p align="center">
+   <img src="https://github.com/TortueDivine/are_dynamic/blob/master/Pr%C3%A9sentation/Restaurant_test_1.jpg?raw=true" alt="Illustration de l'environnement de simulation"/>
+
+</p>
+
 The result we are analyzing:
 
 - The average client's waiting time which is the sum of the time spend for each action from the order of the dishes to the moment the clients begin to eat.
