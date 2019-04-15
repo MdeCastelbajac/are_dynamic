@@ -353,5 +353,5 @@ Ensuite actuellement la valeur des temps d'attente est parfois tributaire de la 
 lien test:
 
 <p align="center">
-   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/TAM.svg"/> 
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/TAM.svg?raw=true"/> 
 </p> 
