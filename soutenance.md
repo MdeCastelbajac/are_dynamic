@@ -36,12 +36,12 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
 - D'une part, les **paramètres** :
   
- - <strong>L'affluence des clients</strong> : fixe et maximale. 
+  - <strong>L'affluence des clients</strong> : fixe et maximale. 
    
- - <strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
+  - <strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
     
        
-       # MENU OF DISHES
+        # MENU OF DISHES
         MENU = {"Boeuf Bourguignon" : 35.30,
         "Spicy Burger" : 15.30,
         "Tartar" : 13.0,
@@ -59,19 +59,19 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
         
 - D'autre part, les **agents**: 
  
- - les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte.
+  - les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte.
     
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif?raw=true"/>  
 </p>
- - les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats,    prendre les commandes, les transmettre à la cuisine ou être inactif.
+  - les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats,    prendre les commandes, les transmettre à la cuisine ou être inactif.
 
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_down.gif?raw=true"/> 
 </p>
     
 - Enfin, la **variable calculée** :   
- - Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. 
+  - Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. 
   
 ## Echelle micro : quelques spécificités 
 
@@ -79,17 +79,17 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
     
     class Waiter:
 
-    #Initialization
-    def __init__(self, num, room, coords):
-        self.num = num # Numéro du serveur
-        self.room = room # Placement dans la salle
-        self.img = self.room.create_image(coords[0], coords[1], image = waiter_down) # Création de l'image
-        self.coords = coords # Waiter's real-time coords
-        self.orders = {} # Waiter's list of orders
-        self.delivery = 0 # waiter's list of delivery
-        self.waiting = False # the waiter's waiting
-        self.number = 0 # Target table's number
-        param.waiters[self.num] = 0 #Waiter's state
+         #Initialization
+         def __init__(self, num, room, coords):
+             self.num = num # Numéro du serveur
+             self.room = room # Placement dans la salle
+             self.img = self.room.create_image(coords[0], coords[1], image = waiter_down) # Création de l'image
+             self.coords = coords # Waiter's real-time coords
+             self.orders = {} # Waiter's list of orders
+             self.delivery = 0 # waiter's list of delivery
+             self.waiting = False # the waiter's waiting
+             self.number = 0 # Target table's number
+             param.waiters[self.num] = 0 #Waiter's state
 
  Pourquoi c'est utile : 
  - Chaque serveur est une **instance** de la classe. Les fonctions associée s'appliquent donc automatiquement à tous les serveurs (sous certaines conditions)
