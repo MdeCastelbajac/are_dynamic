@@ -211,7 +211,7 @@ On commence donc par calculer simplement la moyenne et la variance des temps de 
     Variance = 46.44
   
   
-  - On gardera le même nombre de tables, et on fixera le nombre de serveurs à .
+  - On gardera le même nombre de tables, et on fixera le nombre de serveurs à 4.
   - Dans un premier temps, on réduit puis augmente la taille de la carte, de telle façon à ce qu'elle conserve sa moyenne, et on récupère les valeurs du TAM selon la même procédure que précédemment.
 
 
