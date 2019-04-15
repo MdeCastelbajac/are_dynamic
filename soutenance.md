@@ -150,24 +150,25 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
 
 ## Expériences et Exploitation des résultats
 
+**On va étudier l'influence de différents paramètres sur le TAM.**
+
+
+Ceux qui semblent importants *a priori*.
+   - le nombre de serveurs.
+   - le nombre de plats - donc de temps de cuisson différents -.
+   - la variance des temps de cuisson. 
+
 #### Protocole 1
 Nous commencerons par observer **l'influence du nombre de serveur**.
 
+  - On isole le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
+  - Pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**.
 
 
-Rappelons ici les questions que nous nous posions au début du projet : 
-- Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un **TAM optimal**? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus?
-
-
-- On isole le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
-
-Ensuite, pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix aléatoires de plats sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
-
-Enfin, on construit un **histogramme des TAM en fonction du nombre de serveurs**.
-
+*Un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix aléatoires de plats sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.*
 
 #### Résultats
-On construit par la suite le graphe suivant duquel on peut déduire plusieurs affirmations intéressantes :
+
 
 
 
@@ -197,9 +198,9 @@ Reprenons donc la carte utilisée jusqu'ici
         }
     
     
-  Si l'on veut obtenir des résultats exploitables, il nous faut utiliser seulement des cartes ayant une **même moyenne de temps de cuisson.**
+  - Si l'on veut obtenir des résultats exploitables, il nous faut utiliser seulement des cartes ayant une **même moyenne de temps de cuisson.**
   
-  On commence donc par calculer simplement la moyenne et la variance des temps de cuisson de cette carte, qui servira de référence pour la suite de l'expérience.
+On commence donc par calculer simplement la moyenne et la variance des temps de cuisson de cette carte, qui servira de référence pour la suite de l'expérience.
   
   
     Moyenne = 17.44
@@ -207,9 +208,9 @@ Reprenons donc la carte utilisée jusqu'ici
     Variance = 46.44
   
   
- On gardera le même nombre de tables, et on fixera le nombre de serveurs à .
- 
- Dans un premier temps, on réduit puis augmente la taille de la carte, de telle façon à ce qu'elle conserve sa moyenne, et on récupère les valeurs du TAM selon la même procédure que précédemment.
+  - On gardera le même nombre de tables, et on fixera le nombre de serveurs à .
+  - Dans un premier temps, on réduit puis augmente la taille de la carte, de telle façon à ce qu'elle conserve sa moyenne, et on récupère les valeurs du TAM selon la même procédure que précédemment.
+
 
 Voici les deux cartes obtenues après modifications : 
 
