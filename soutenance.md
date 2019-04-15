@@ -23,8 +23,8 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
 **Voici les problématiques que nous nous sommes posées :**
 
 - **Quel est l’impact du nombre de serveurs sur le TAM?**
-- **Est il proportionnel, ou autre?**
-- **Existe t il un nombre de serveurs optimal, ou à partir duquel celui-ci n’a plus d’effet significatif sur le TAM?**
+  - **Est il proportionnel, ou autre?**
+  - **Existe t il un nombre de serveurs optimal, ou à partir duquel celui-ci n’a plus d’effet significatif sur le TAM?**
 
 - **Quel est l’impact de la carte sur le TAM? :**
   - **Selon la variance des temps de cuisson.**
