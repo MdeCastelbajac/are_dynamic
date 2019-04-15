@@ -1,31 +1,51 @@
-# ARE DYNAMIC
+# Optimisation of the waiting time in a restaurant
 
-## RESTAURATION : Optimisation et coordination des tâches
+## Introduction
 
-## Présentation du projet
+As part of the ARE Dynamic course at Sorbonne University we had to choose a Dynamic system to model in the semester’s time frame. It is a mean to use Mathematical and Computer programming notions on a specific subject.
 
-Nous avons décidé de modéliser et simuler, dans le cadre de l'Atelier de Recherche Encadrée, l'activité d'un restaurant, en étudiant l'organisation et la coordination des tâches en nous concentrant sur l'optimisation du temps d'attente.
+After a few weeks of an introduction course on Python we had to choose a specific dynamic system to work on.
 
-Nous rappellerons qu'un système complexe est "un ensemble constitué de nombreuses entités dont les interactions produisent un comportement global difficilement prévisible" (définition du CNRS). Nous détaillerons ci-après les entités, intéractions et comportements de notre modèle.
+We had several ideas of simulations, like predator/prey systems, or road simulations, ...
+As a group of four students, we finally chose the simulation of a restaurant which is a type of model called Agent Based Model, or ABM.
+ABM is a pretty new concept initiated in 1971, made possible by new mathematical theories and new computer capabilities.
+The idea behind an ABM, is to set rules at an individual level on each entity called autonomous agents, and then to analyze how their interactions result in system wide changes.
 
+An ABM is defined on wikipedia as 
 
-### Description du modèle
+> a class of computational models for simulating the actions and interactions of autonomous agents with a view to assessing their effects on the system as a whole
 
-Le modèle est bâti autours de cinq points clés : 
-- Les clients qui arrivent aléatoirement.
-- Les tables que ces derniers remplissent pour passer commande aléatoirement.
-- Les serveurs, chargés entre autre de récupérer ces commandes et de les envoyer en cuisine. Ils effectuent également tout un tas d'autre tâches plus ou moins intermédiaires : apporter les plats, débarasser, accueillir les clients, etc.
-- Une cuisine, pivot du modèle, chargée de trier, en fonction de divers paramètres, les plats à cuisiner / préparer en respectant une contrainte fondamentale : les plats commandés à une même tables doivent être servis dans un intervalle de temps restreint, les clients d'une même tables s'attendent à manger ensemble.
-- Un Temps d'Attente Moyen ou TAM, qui est la valeur à surveiller. Elle se construit en calculant le temps d'attente, pour un client, entre deux étapes (ie arrivée -> commande, commande -> dégustation, etc.).
-<p align="center">
-   <img src="https://github.com/TortueDivine/are_dynamic/blob/master/Pr%C3%A9sentation/Restaurant_test_1.jpg?raw=true" alt="Illustration de l'environnement de simulation"/>
+This technique enables the possibility to analyze complex systems which we could not analyze before.
+There are a lot of relatively significant work that have been done thanks to this technique! 
+It has been used in biology with the analysis of the evolution of epidemics, or in business with the modelisation of logistics, in economics and social sciences, …
 
-</p>
+Specifically our ABM is about analyzing how the waiting time of the clients evolves in a restaurant according to different parameters. 
 
-### Objectifs
+## Our Model and the parameters
 
-On s'aperçoit immédiatement que les comportements respectifs des serveurs et de la cuisine auront une grande influence sur le TAM.
+The configuration of the restaurant:
 
-Nous nous demanderons donc s'il existe des comportements plus efficaces (compte tenu de la place de l'aléatoire) qui permettent d'obtenir un TAM minimal.
+- The number of tables of four people (which is a limitation of our model). Each table is filled by the clients affluence and then each tables books a dish randomly.
+- The Menu with several choices and a variable cooking time for each dish
+- The waiters who are among other tasks taking the orders, bringing them to the kitchen, and so on.
+- The kitchen is dealing with the orders, and respecting some specific rules, like cooking each tables orders so that each table’s clients can begin to eat simultaneously. 
 
-On pourra songer aussi à modifier d'autres paramètres plus spécifiques du modèle pour en tirer d'autres observations comme la rapidité d'exécution des différentes entités, ou encore la variété (et donc la variabilité) des temps de cuisson / préparation des plats.
+The result we are analyzing:
+
+- The average client's waiting time which is the sum of the time spend for each action from the order of the dishes to the moment the clients begin to eat.
+
+## The main goal
+
+Our plan according to this model, is to determine and compare the average client waiting time, from the moment they are reaching their table to the moment they can begin to eat their meal.
+
+The goal is to analyze how some parameters impact the average waiting time.
+
+We are for example simulating how the number of choices in the menu impacts the waiting time, or how the variability of the dishes cooking times has an impact on the average waiting time.
+We are also trying to grasp the way the number of waiters impact this waiting time. Is it proportional? Is there a critical number where adding even more waiters doesn’t impact the waiting time anymore? And so on!
+
+## How it could be useful
+
+In fact if we could determine the optimal workforce (Waiters/Cooks) needed for a specific restaurant configuration (Number of tables, and estimated client affluence), then this system could be used to streamline and optimize the workforce needed. This could save money, improve the client satisfaction, and facilitate the restaurants management.
+
+## If you want to dive deeper in our project, please visit our Github site:
+https://mdecastelbajac.github.io/are_dynamic
