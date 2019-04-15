@@ -11,6 +11,11 @@ La Deuxième semaine s’est porté sur la création de bouts de codes afin de p
 La Troisième semaine s’est porté sur le choix d’une programmation orienté Objet en python étant donné le choix de simulation de type ABM. des dessins initiaux ont été réalisés pour les tables et les serveurs,et aussi l’utilisation de la bibliothèque Tkinter ( interface graphique).
 Une présentation a aussi eu lieu pour introduire notre sujet et expliquer ce que l’on fera sur ce sujet la. 
 
+<p align="center">
+   <img src="https://github.com/TortueDivine/are_dynamic/blob/gh-pages/Docs/59bc1d1e-c8a4-4f60-80b9-2812c9fcb3c0.jpg?raw=true" alt="Illustration du serveur"/>
+
+</p>
+
 ### Quatrième semaine et cinquième semaine  :
 La quatrième et cinquième semaine de cours s’est porté sur l’affinement du modèle, c’est à dire la vérification du code et la création  des fonctions nécessaires. On a aussi la mise en place de la simulation (dessins), de la cuisine et du calcul du temps de cuisson 
 
