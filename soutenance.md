@@ -82,7 +82,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
   
 ## Echelle micro : quelques spécificités 
 
-##### Exemple d'OOP
+#### Exemple d'OOP
     
     class Waiter:
 
@@ -131,7 +131,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
  
  
- ##### Calcul du TAM
+ #### Calcul du TAM
  
  Dans la classe Table :
  
@@ -150,7 +150,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
 - Sinon, elle prend les plats les plus longs à cuire. Elle retire a chaque tour 1.0 seconde.
 - Ces "choix" ont une influence sur le TAM. A chaque tour de fonction, toutes les tables qui attendent voient leur temps d'attente augmentés d'1.0 seconde.
 
-##### Comment ça marche ?
+#### Comment ça marche ?
 
  - Le programme fait tourner en boucle des fonctions **main** pour chaque classe.
  - Les serveurs effectuent les actions les plus importantes en priorité.
