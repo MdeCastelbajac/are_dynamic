@@ -16,7 +16,7 @@ L’idée fondamentale, est l’application de règles à l’état micro à ce 
 
 Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet la simulation et l'optimisation est un sujet aux résultats palpables.
 
-Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire. En effet les choix des plats initié par les tables sont purement aléatoire.
+Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire. En effet les choix des plats initiés par les tables sont purement aléatoire.
 
 **Depuis la première présentation, il y a eu quelques changements, des déconvenues aussi - mais nous y reviendrons - et, bien sûr, les forums de programmation comme StackOverflow ont été nos meilleurs amis. Nous vous présentons donc aujourd'hui le projet dans sa version finale, les expériences que nous avons pu mener ainsi que les résultats que nous avons pu exploiter. Enfin, nous reviendrons sur les améliorations qu'il reste à apporter au projet.**
 
