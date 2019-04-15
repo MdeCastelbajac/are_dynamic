@@ -66,6 +66,8 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
   ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif)
   
   les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
+  
+  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_down.gif)
  
 - Enfin, la **variable calculée** : 
   
@@ -123,7 +125,8 @@ Au coeur de la simulation, on retrouve les fonctions de déplacement que l'on ex
             self.room.move(self.img, 5, 0)
         self.coords = self.room.coords(self.img)
    
-   
+  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_left.gif)
+  ![](https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_right.gif)
    
  En effet, plusieurs fonctions font appel aux déplacements : 
  
