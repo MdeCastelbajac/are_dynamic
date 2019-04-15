@@ -1,7 +1,8 @@
 ### Première semaine :   
-Lors de la première semaine de l’ARE, la séance s’est porté sur le choix d’un sujet pour le projet nous avons eu le choix entre 3 sujets qui sont : - La survie d’une espèce en fonction de parametre etabli dans un système proie-prédateur.
+Lors de la première semaine de l’ARE, la séance s’est portée sur le choix d’un sujet pour le projet. Nous avons eu le choix entre 3 sujets qui sont :
+- La survie d’une espèce en fonction de parametre etabli dans un système proie-prédateur.
 - Modélisation d’une Autoroute en fonction de différents paramètres.
--Optimisation du TAM dans un restaurant.
+- Optimisation du TAM dans un restaurant.
 Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet la simulation et l'optimisation est une sujet aux résultats palpables.Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire.
 
 ### Deuxième semaine :
