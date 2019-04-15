@@ -103,7 +103,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  - On a donc pas besoin de tous les "surveiller". 
  
  
- #### Le déplacement
+#### Le déplacement
  
        def movement_x(self, x_dir): # Those parameters are conditional, they indicate which direction
        # the waiter takes
@@ -131,7 +131,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
  
  
- #### Calcul du TAM
+#### Calcul du TAM
  
  Dans la classe Table :
  
