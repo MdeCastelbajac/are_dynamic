@@ -162,7 +162,7 @@ Ceux qui semblent importants *a priori*.
 Nous commencerons par observer **l'influence du nombre de serveur**.
 
   - On isole le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
-  - Pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**.
+  - Pour un nombre de serveur **variant de 1 à - au plus - 10**, on récupère les **50 premières valeurs de Temps d'attente**.
   - De plus, on récupère le **TAM** correspondant.
 
 
