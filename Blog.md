@@ -6,7 +6,7 @@ Lors de la première semaine de l’ARE, la séance s’est portée sur le choix
 Le restaurant nous a semblé être le choix le plus original, et la difficulté progressive et modulable. Il présente également l'intérêt notable d'être concret! En effet la simulation et l'optimisation est une sujet aux résultats palpables.Enfin il présente l'intérêt et la difficulté d’avoir des paramètres multiples, ainsi que de présenter une notion d’aléatoire.
 
 ### Deuxième semaine :
-La Deuxième semaine s’est porté sur la création de bouts de codes afin de poser les bases pour la réalisation de notre sujet, aussi on a commencé à se familiariser avec l’environnement github
+La Deuxième semaine s’est porté sur la création de bouts de codes afin de poser les bases pour la réalisation de notre sujet.  Nous avons aussi commencé à se familiariser avec l’environnement github
 
 ### Troisième semaine :
 La Troisième semaine s’est porté sur le choix d’une programmation orienté Objet en python étant donné le choix de simulation de type ABM. des dessins initiaux ont été réalisés pour les tables et les serveurs,et aussi l’utilisation de la bibliothèque Tkinter ( interface graphique).
