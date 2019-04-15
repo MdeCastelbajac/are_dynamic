@@ -1,3 +1,10 @@
+<p align="center">
+   <img src="https://github.com/TortueDivine/are_dynamic/blob/master/Pr%C3%A9sentation/Restaurant_test_1.jpg?raw=true" alt="Illustration de l'environnement de simulation"/>
+
+</p>
+
+
+
 ## Introduction
 
 Dans le cadre de L’ARE nous devions modéliser un système complexe. Qui selon le CNRS est :
