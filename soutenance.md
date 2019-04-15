@@ -36,9 +36,9 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
  - D'une part, les **paramètres** :
   
-   <strong>L'affluence des clients</strong> qui est fixe et maximale. Dès que les conditions sont réunies - une table est     libre et un serveur est prêt à les accueillir - les clients arrivent.
-  
-   <strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
+   ><strong>L'affluence des clients</strong> : fixe et maximale. 
+   
+   ><strong>La carte des plats</strong> qui à chaque plat associe un temps de cuisson ou de préparation unique.
     
        
        # MENU OF DISHES
@@ -56,21 +56,17 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
         "Filet de Merlu a la Plancha" : 16.00,
         "Noix de Saint-Jacques au beurre salé" : 21.00
         }
-    
-  
-   <strong>La cuisine</strong> qui prépare les plats commandés de telle façon à ce que les plats commandés à une même table  soient prêts en même temps.
-  
+        
 - D'autre part, les **agents**: 
  
-  les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte. Elles peuvent alors appeler un serveur qui vient prendre la comande. Une fois celle-ci reçu, elles se vident après une durée fixe.
-  
-  
+  >les <strong>tables</strong> de quatre qui une fois remplies, commandent aléatoirement des plats parmi ceux proposés dans la  carte.
+    
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/table_served.gif?raw=true"/>  
 </p>
   
-  les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
-  
+ >les <strong>serveurs</strong> qui peuvent, dans cet ordre de priorité : accueillir de nouveaux cients, servir les plats, prendre les commandes, les transmettre à la cuisine ou être inactif.
+
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/test/waiter_down.gif?raw=true"/> 
 </p>
@@ -78,7 +74,7 @@ Depuis la première présentation, il y a eu quelques changements, des déconven
  
 - Enfin, la **variable calculée** : 
   
-  Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. Plus exactement, le temps attendu entre l'arrivée et le passage de la commande, et le temps attendu entre le passage de la commande et l'arrivée des plats.
+  >Le <strong>temps d'attente moyen</strong>, noté <strong>TAM</strong> qui représente le temps moyen qu'attendent les clients entre leur arrivée et leur départ du restaurant. 
   
 ## Echelle micro : quelques spécificités 
 
@@ -164,10 +160,10 @@ Nous commencerons par observer **l'influence du nombre de serveur**.
 
 
 Rappelons ici les questions que nous nous posions au début du projet : 
-   - Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un **TAM optimal**? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus?
+- Existe-t-il, d'une part, un nombre de serveur qui permet d'obtenir un **TAM optimal**? et, par suite, un nombre de serveur au-delà duquel le TAM ne diminue plus?
 
 
-Il convient tout d'abord d'isoler le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
+- On isole le paramètre **nombre de serveurs**. On fixe alors tous les autres paramètres. Pour toutes nos expériences on fixe le nombre de table à **8**, et la carte au modèle présenté ci-dessus.
 
 Ensuite, pour un nombre de serveur **variant de 1 à 8**, on récupère les **50 premières valeurs de Temps d'attente**, un nombre qui paraît suffisament grand compte tenu de l'influence qu'auront les choix aléatoires de plats sur celles-ci. L'intervalle du nombre de serveur s'explique facilement par le fait qu'au-delà de huit, il y a toujours un ou plusieurs serveurs qui sont inactifs, du fait du nombre de table préalablement fixé.
 
