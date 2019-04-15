@@ -52,10 +52,6 @@ In fact if we could determine the optimal workforce (Waiters/Cooks) needed for a
 
 [Avancée du projet hebdomadaire](Blog.md)
 
-[Fonctionnement/MakingOff](Fonctionnement.md)
-
-[Annexes](Annexes.md)
-
 [Ressources et autres applications d'ABM](ExemplesDocu.md)
 
 [Le projet ARE et nous](Nous.connaitre.ARE.md)
