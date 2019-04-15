@@ -174,11 +174,15 @@ Nous commencerons par observer **l'influence du nombre de serveur**.
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Nbre%20de%20serveurs/Temps%20d'attente.png?raw=true" />  
 </p>
 
+  - On peut immédiatement observer ici que plus le nombre de serveurs augmente, plus les "pics" de temps d'attente diminuent, peu importe la situation.
 
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Nbre%20de%20serveurs/TAM%20en%20fonction%20du%20nombre%20de%20serveurs.png?raw=true" />  
 </p>
 
+ - Comme attendu, on observe que plus il y a de serveurs, moins les clients attendent en moyenne. 
+ - Au delà de 4 serveurs, les variations ne sont plus significatives.  
+ 
 #### Protocole 2 
 Nous observerons ici l'influence de la carte, de part sa **taille**, et de part **la variance des temps de cuisson**.
 Reprenons donc la carte utilisée jusqu'ici
