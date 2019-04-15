@@ -321,7 +321,9 @@ On procèdera encore une fois de la même façon.
         Variance = 4.44
 
 
-On construit avec ces données le graphe suivant : 
+On construit avec ces données le graphe suivant :
+
+
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Temps%20d'attente%20en%20fonction%20de%20la%20variance%20de%20la%20carte.png?raw=true"/> 
 </p>
@@ -330,10 +332,15 @@ On construit avec ces données le graphe suivant :
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Evolution%20du%20TAM.png?raw=true"/> 
 </p>
 
+#### Resultats
+
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/TAM-%20Variance%2Ctaille%20conclu.png?raw=true"/> 
 </p> 
 
+Observations sur la taille et la variance de la carte:
+- Impact de la variance sur le TAM et sur la variabilité des temps d'attente
+- La taille de la carte n'influe que très peu
 
 ## Conclusion et dernières réflexions 
 
