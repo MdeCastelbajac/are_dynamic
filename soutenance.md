@@ -313,10 +313,10 @@ On procèdera encore une fois de la même façon.
 
 
 On construit avec ces données le graphe suivant : 
- 
 
-
-
+<p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Evolution%20du%20TAM-%20Variance.png"/> 
+</p>
 
 ## Conclusion et dernières réflexions 
 
