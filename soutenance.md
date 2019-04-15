@@ -260,9 +260,14 @@ Voici les deux cartes obtenues après modifications :
  
  On construit avec ces données le graphe suivant : 
  
-       
+ <p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Taille/Temps%20d'attente%20en%20fonction%20de%20la%20taille%20de%20la%20carte.png"/> 
+</p>
+      
  
- 
+<p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Taille/Evolution%20du%20TAM.png"/> 
+</p> 
 
 
 
@@ -316,6 +321,13 @@ On procèdera encore une fois de la même façon.
 
 
 On construit avec ces données le graphe suivant : 
+<p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Temps%20d'attente%20en%20fonction%20de%20la%20variance%20de%20la%20carte.png"/> 
+</p>
+
+<p align="center">
+   <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/Variance/Evolution%20du%20TAM.png"/> 
+</p>
 
 <p align="center">
    <img src="https://github.com/MdeCastelbajac/are_dynamic/blob/gh-pages/Docs/GraphesSoutenance/TAM-%20Variance%2Ctaille%20conclu.png"/> 
